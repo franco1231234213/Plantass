@@ -1,0 +1,2169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BioSanear La Rioja — Control de Plagas & Desinfección</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #1a5c2a;
+    --verde-claro: #2d8c44;
+    --verde-neon: #4dbb68;
+    --crema: #f5f0e8;
+    --crema-oscuro: #e8dfc8;
+    --tierra: #8b5e3c;
+    --negro: #0d1205;
+    --gris: #6b7280;
+    --blanco: #ffffff;
+    --naranja: #e8600a;
+    --sombra: 0 4px 32px rgba(26,92,42,0.12);
+    --sombra-fuerte: 0 8px 48px rgba(26,92,42,0.22);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--crema);
+    color: var(--negro);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5 { font-family: 'Syne', sans-serif; }
+
+  /* === NAV === */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(13,18,5,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(77,187,104,0.15);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+
+  .nav-logo-icon {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--verde-neon), var(--verde));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+
+  .nav-logo span {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--blanco);
+  }
+
+  .nav-logo em {
+    font-style: normal;
+    color: var(--verde-neon);
+  }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--verde-neon); }
+
+  .nav-actions {
+    display: flex; align-items: center; gap: 1rem;
+  }
+
+  .btn-cart {
+    position: relative;
+    background: rgba(77,187,104,0.15);
+    border: 1px solid rgba(77,187,104,0.3);
+    border-radius: 8px;
+    padding: 8px 14px;
+    color: var(--verde-neon);
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  .btn-cart:hover { background: rgba(77,187,104,0.25); }
+
+  .cart-badge {
+    position: absolute; top: -6px; right: -6px;
+    background: var(--naranja);
+    color: white;
+    border-radius: 50%;
+    width: 18px; height: 18px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    display: none;
+  }
+
+  .btn-presupuesto {
+    background: var(--verde-neon);
+    color: var(--negro);
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: none;
+    font-family: 'Syne', sans-serif;
+    transition: all 0.2s;
+    border: none; cursor: pointer;
+  }
+
+  .btn-presupuesto:hover { background: var(--verde-claro); color: white; }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    background: var(--negro);
+    display: flex; align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 64px;
+  }
+
+  .hero-bg-pattern {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(26,92,42,0.35) 0%, transparent 55%),
+      radial-gradient(circle at 80% 70%, rgba(77,187,104,0.12) 0%, transparent 50%);
+  }
+
+  .hero-grid-lines {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(77,187,104,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(77,187,104,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1200px; margin: 0 auto;
+    padding: 5rem 2rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(77,187,104,0.12);
+    border: 1px solid rgba(77,187,104,0.3);
+    border-radius: 100px;
+    padding: 6px 14px;
+    color: var(--verde-neon);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-badge-dot {
+    width: 6px; height: 6px;
+    background: var(--verde-neon);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  .hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--blanco);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 .accent {
+    color: var(--verde-neon);
+    position: relative;
+  }
+
+  .hero-desc {
+    color: rgba(255,255,255,0.65);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--verde-neon);
+    color: var(--negro);
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    font-family: 'Syne', sans-serif;
+    transition: all 0.2s;
+    border: none; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(77,187,104,0.4); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--blanco);
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.25);
+    transition: all 0.2s;
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+
+  .btn-outline:hover { border-color: var(--verde-neon); color: var(--verde-neon); }
+
+  .hero-stats {
+    display: flex; gap: 2rem; margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .hero-stat strong {
+    display: block;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--verde-neon);
+  }
+
+  .hero-stat span {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* Hero Right Panel */
+  .hero-panel {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(77,187,104,0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .hero-panel-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--verde-neon);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .certif-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0.8rem;
+  }
+
+  .certif-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: rgba(77,187,104,0.06);
+    border: 1px solid rgba(77,187,104,0.12);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+  }
+
+  .certif-list .icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .certif-list strong {
+    display: block;
+    color: white;
+    font-size: 0.83rem;
+    margin-bottom: 2px;
+  }
+
+  /* === SECTIONS === */
+  section { padding: 5rem 2rem; }
+
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--verde-claro);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--negro);
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    color: var(--gris);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  .section-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 3rem; gap: 2rem; flex-wrap: wrap;
+  }
+
+  /* === SERVICIOS === */
+  #servicios { background: var(--crema); }
+
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .servicio-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(26,92,42,0.08);
+    transition: all 0.3s;
+    display: flex; flex-direction: column;
+  }
+
+  .servicio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-fuerte);
+    border-color: rgba(26,92,42,0.2);
+  }
+
+  .servicio-img {
+    height: 160px;
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem;
+  }
+
+  .servicio-img.plagas { background: linear-gradient(135deg, #0d1205, #1a5c2a); }
+  .servicio-img.desinfeccion { background: linear-gradient(135deg, #0a3d62, #1a6b8a); }
+  .servicio-img.fumigacion { background: linear-gradient(135deg, #6b2e00, #c05200); }
+  .servicio-img.jardin { background: linear-gradient(135deg, #1a5c2a, #4dbb68); }
+  .servicio-img.termitas { background: linear-gradient(135deg, #3d1a00, #8b5e3c); }
+  .servicio-img.industrial { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+
+  .servicio-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+
+  .servicio-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .servicio-desc {
+    color: var(--gris);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 1rem;
+  }
+
+  .servicio-precio {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--crema-oscuro);
+  }
+
+  .precio-desde {
+    font-size: 0.7rem;
+    color: var(--gris);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .precio-val {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--verde);
+  }
+
+  .btn-contratar {
+    background: var(--negro);
+    color: white;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Syne', sans-serif;
+  }
+
+  .btn-contratar:hover { background: var(--verde); }
+
+  .servicio-tags {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-bottom: 1rem;
+  }
+
+  .tag {
+    background: var(--crema);
+    border: 1px solid var(--crema-oscuro);
+    border-radius: 100px;
+    padding: 3px 10px;
+    font-size: 0.72rem;
+    color: var(--gris);
+    font-weight: 500;
+  }
+
+  /* === PRODUCTOS === */
+  #productos { background: white; }
+
+  .productos-filtros {
+    display: flex; gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .filtro-btn {
+    padding: 8px 18px;
+    border-radius: 100px;
+    border: 1px solid var(--crema-oscuro);
+    background: white;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--negro);
+  }
+
+  .filtro-btn.active, .filtro-btn:hover {
+    background: var(--verde);
+    color: white;
+    border-color: var(--verde);
+  }
+
+  .productos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+
+  .producto-card {
+    background: var(--crema);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--crema-oscuro);
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .producto-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--sombra);
+  }
+
+  .producto-badge-anmat {
+    position: absolute; top: 10px; right: 10px;
+    background: var(--verde);
+    color: white;
+    font-size: 0.62rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .producto-img {
+    height: 120px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.8rem;
+    background: white;
+  }
+
+  .producto-body { padding: 1rem; }
+
+  .producto-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .producto-reg {
+    font-size: 0.68rem;
+    color: var(--gris);
+    margin-bottom: 0.6rem;
+  }
+
+  .producto-precio-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 0.75rem;
+  }
+
+  .producto-precio {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--verde);
+  }
+
+  .btn-add-cart {
+    background: var(--negro);
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 7px 12px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+    display: flex; align-items: center; gap: 5px;
+  }
+
+  .btn-add-cart:hover { background: var(--verde); }
+
+  /* === IA SECTION === */
+  #asistente { background: var(--negro); }
+
+  .ia-wrapper {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+  }
+
+  .ia-info .section-title { color: white; }
+  .ia-info .section-label { color: var(--verde-neon); }
+
+  .ia-desc {
+    color: rgba(255,255,255,0.65);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .ia-features {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .ia-features li {
+    display: flex; align-items: center; gap: 10px;
+    color: rgba(255,255,255,0.75);
+    font-size: 0.9rem;
+  }
+
+  .ia-features .check {
+    width: 22px; height: 22px;
+    background: rgba(77,187,104,0.2);
+    border: 1px solid rgba(77,187,104,0.4);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+    color: var(--verde-neon);
+    flex-shrink: 0;
+  }
+
+  /* Chat Widget */
+  .chat-widget {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(77,187,104,0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    height: 480px;
+  }
+
+  .chat-header {
+    background: rgba(77,187,104,0.1);
+    border-bottom: 1px solid rgba(77,187,104,0.15);
+    padding: 1rem 1.25rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .chat-avatar {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--verde-neon), var(--verde));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+
+  .chat-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: white;
+  }
+
+  .chat-status {
+    font-size: 0.72rem;
+    color: var(--verde-neon);
+    display: flex; align-items: center; gap: 5px;
+  }
+
+  .chat-status-dot {
+    width: 6px; height: 6px;
+    background: var(--verde-neon);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.25rem;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+
+  .chat-messages::-webkit-scrollbar { width: 4px; }
+  .chat-messages::-webkit-scrollbar-track { background: transparent; }
+  .chat-messages::-webkit-scrollbar-thumb { background: rgba(77,187,104,0.3); border-radius: 2px; }
+
+  .msg {
+    display: flex; gap: 10px;
+    align-items: flex-start;
+  }
+
+  .msg.user { flex-direction: row-reverse; }
+
+  .msg-bubble {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .msg.bot .msg-bubble {
+    background: rgba(255,255,255,0.07);
+    color: rgba(255,255,255,0.85);
+    border-radius: 4px 12px 12px 12px;
+  }
+
+  .msg.user .msg-bubble {
+    background: var(--verde);
+    color: white;
+    border-radius: 12px 4px 12px 12px;
+  }
+
+  .msg-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .msg.bot .msg-icon { background: rgba(77,187,104,0.2); }
+  .msg.user .msg-icon { background: rgba(77,187,104,0.3); }
+
+  .chat-input-area {
+    border-top: 1px solid rgba(77,187,104,0.15);
+    padding: 1rem 1.25rem;
+    display: flex; gap: 0.75rem;
+  }
+
+  .chat-input {
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(77,187,104,0.2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: white;
+    font-size: 0.85rem;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .chat-input::placeholder { color: rgba(255,255,255,0.3); }
+  .chat-input:focus { border-color: rgba(77,187,104,0.5); }
+
+  .chat-send {
+    background: var(--verde-neon);
+    color: var(--negro);
+    border: none;
+    border-radius: 10px;
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .chat-send:hover { background: var(--verde-claro); color: white; }
+
+  .typing-indicator {
+    display: none;
+    gap: 4px; align-items: center;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 4px 12px 12px 12px;
+    width: fit-content;
+  }
+
+  .typing-indicator.show { display: flex; }
+
+  .typing-dot {
+    width: 6px; height: 6px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    animation: typing 1.2s infinite;
+  }
+
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typing {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-6px); }
+  }
+
+  /* === NORMATIVA === */
+  #normativa { background: var(--crema); }
+
+  .normativa-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .normativa-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid rgba(26,92,42,0.1);
+    border-left: 4px solid var(--verde);
+  }
+
+  .normativa-card-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .normativa-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    color: var(--negro);
+  }
+
+  .normativa-card p {
+    color: var(--gris);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .normativa-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+
+  .normativa-list li {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 0.82rem;
+    color: var(--gris);
+    line-height: 1.5;
+  }
+
+  .normativa-list li::before {
+    content: '✓';
+    color: var(--verde);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .normativa-highlight {
+    background: linear-gradient(135deg, var(--verde) 0%, var(--verde-claro) 100%);
+    border-radius: 16px;
+    padding: 2.5rem;
+    color: white;
+    grid-column: 1 / -1;
+    display: flex; align-items: center; gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .normativa-highlight h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .normativa-highlight p {
+    opacity: 0.85;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .btn-normativa {
+    background: white;
+    color: var(--verde);
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-decoration: none;
+    font-family: 'Syne', sans-serif;
+    white-space: nowrap;
+    transition: all 0.2s;
+    border: none; cursor: pointer;
+  }
+
+  .btn-normativa:hover { background: var(--crema); }
+
+  /* === CART MODAL === */
+  .cart-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    display: none;
+  }
+
+  .cart-overlay.open { display: block; }
+
+  .cart-panel {
+    position: fixed; right: 0; top: 0; bottom: 0;
+    width: 420px; max-width: 100vw;
+    background: white;
+    box-shadow: -8px 0 48px rgba(0,0,0,0.15);
+    z-index: 2001;
+    display: flex; flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .cart-panel.open { transform: translateX(0); }
+
+  .cart-panel-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--crema-oscuro);
+  }
+
+  .cart-panel-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .cart-close {
+    background: none; border: none;
+    font-size: 1.3rem; cursor: pointer;
+    color: var(--gris);
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+
+  .cart-close:hover { background: var(--crema); color: var(--negro); }
+
+  .cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem 1.5rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+
+  .cart-empty {
+    flex: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--gris);
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    padding: 3rem;
+    text-align: center;
+  }
+
+  .cart-empty-icon { font-size: 3rem; opacity: 0.4; }
+
+  .cart-item {
+    display: flex; align-items: center; gap: 1rem;
+    background: var(--crema);
+    border-radius: 10px;
+    padding: 12px;
+    border: 1px solid var(--crema-oscuro);
+  }
+
+  .cart-item-icon {
+    font-size: 1.8rem;
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    background: white;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .cart-item-info { flex: 1; }
+
+  .cart-item-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.875rem;
+    margin-bottom: 2px;
+  }
+
+  .cart-item-type {
+    font-size: 0.72rem;
+    color: var(--gris);
+  }
+
+  .cart-item-price {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--verde);
+  }
+
+  .cart-item-remove {
+    background: none; border: none;
+    color: var(--gris); cursor: pointer;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+    padding: 4px;
+  }
+
+  .cart-item-remove:hover { color: #e53e3e; }
+
+  .cart-qty {
+    display: flex; align-items: center; gap: 6px;
+    margin-top: 4px;
+  }
+
+  .cart-qty button {
+    width: 22px; height: 22px;
+    background: white;
+    border: 1px solid var(--crema-oscuro);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .cart-qty button:hover { background: var(--verde); color: white; border-color: var(--verde); }
+
+  .cart-qty span {
+    font-size: 0.82rem;
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+  }
+
+  .cart-footer {
+    border-top: 1px solid var(--crema-oscuro);
+    padding: 1.5rem;
+  }
+
+  .cart-total-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+
+  .cart-total-label { color: var(--gris); font-size: 0.875rem; }
+
+  .cart-total-value {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--verde);
+  }
+
+  .btn-checkout {
+    width: 100%;
+    background: var(--verde);
+    color: white;
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+
+  .btn-checkout:hover { background: var(--verde-claro); }
+
+  /* === CONTACTO === */
+  #contacto { background: white; }
+
+  .contacto-grid {
+    display: grid; grid-template-columns: 1fr 1.2fr;
+    gap: 4rem; align-items: start;
+  }
+
+  .contacto-info h3 {
+    font-size: 1.5rem; margin-bottom: 1rem;
+  }
+
+  .contacto-info p {
+    color: var(--gris);
+    line-height: 1.7;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  .contacto-datos {
+    display: flex; flex-direction: column; gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .contacto-dato {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 0.875rem;
+    color: var(--negro);
+  }
+
+  .contacto-dato-icon {
+    width: 36px; height: 36px;
+    background: var(--crema);
+    border: 1px solid var(--crema-oscuro);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+
+  .form-grid { display: flex; flex-direction: column; gap: 1rem; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+  .form-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--negro);
+    letter-spacing: 0.02em;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    background: var(--crema);
+    border: 1px solid var(--crema-oscuro);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 0.875rem;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--negro);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--verde);
+    background: white;
+  }
+
+  .form-textarea { resize: vertical; min-height: 100px; }
+
+  .form-submit {
+    background: var(--verde);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    transition: all 0.2s;
+    width: 100%;
+  }
+
+  .form-submit:hover { background: var(--verde-claro); }
+
+  /* === FOOTER === */
+  footer {
+    background: var(--negro);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 2rem;
+  }
+
+  .footer-content {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 2rem;
+  }
+
+  .footer-brand p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-col h4 {
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+  }
+
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .footer-col a {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--verde-neon); }
+
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.78rem;
+    flex-wrap: wrap; gap: 0.75rem;
+  }
+
+  .footer-bottom a { color: var(--verde-neon); text-decoration: none; }
+
+  .anmat-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(77,187,104,0.1);
+    border: 1px solid rgba(77,187,104,0.2);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.72rem;
+    color: var(--verde-neon);
+    font-weight: 600;
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 2rem; left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--verde);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    z-index: 3000;
+    transition: transform 0.3s;
+    display: flex; align-items: center; gap: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    white-space: nowrap;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* Presupuesto Modal */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    display: none; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal-box {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    width: 100%; max-width: 560px;
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute; top: 1rem; right: 1rem;
+    background: var(--crema); border: none;
+    width: 32px; height: 32px;
+    border-radius: 6px;
+    cursor: pointer; font-size: 1rem; color: var(--gris);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .modal-close:hover { background: var(--crema-oscuro); }
+
+  .modal-title {
+    font-size: 1.4rem; margin-bottom: 0.5rem;
+  }
+
+  .modal-sub {
+    color: var(--gris); font-size: 0.875rem; margin-bottom: 1.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hero-content { grid-template-columns: 1fr; gap: 2rem; }
+    .servicios-grid { grid-template-columns: 1fr 1fr; }
+    .productos-grid { grid-template-columns: 1fr 1fr; }
+    .ia-wrapper { grid-template-columns: 1fr; }
+    .normativa-grid { grid-template-columns: 1fr; }
+    .contacto-grid { grid-template-columns: 1fr; }
+    .footer-content { grid-template-columns: 1fr 1fr; }
+    .hero h1 { font-size: 2.5rem; }
+    .nav-links { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .servicios-grid { grid-template-columns: 1fr; }
+    .productos-grid { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-content { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2rem; }
+    section { padding: 3.5rem 1rem; }
+    .cart-panel { width: 100%; }
+  }
+
+  .nav-menu-btn {
+    display: none;
+    background: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 900px) {
+    .nav-menu-btn { display: flex; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">🌿</div>
+    <span>Bio<em>Sanear</em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#asistente">Asistente IA</a></li>
+    <li><a href="#normativa">Normativa</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-cart" onclick="toggleCart()">
+      🛒 <span id="cartCountNav" style="font-size:0.8rem;font-weight:700;display:none"></span>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+    <button class="btn-presupuesto" onclick="openPresupuesto()">Pedir Presupuesto</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        La Rioja Capital · Habilitados ANMAT · SENASA
+      </div>
+      <h1>Control de Plagas y <span class="accent">Desinfección</span> Profesional</h1>
+      <p class="hero-desc">
+        Servicio certificado conforme a la Ley Nacional 19.587, normativa ambiental provincial Ley 8355/08 y habilitación municipal de La Rioja. Productos registrados ante ANMAT y SENASA. Técnicos matriculados con Director Técnico acreditado.
+      </p>
+      <div class="hero-ctas">
+        <a href="#servicios" class="btn-primary">🔬 Ver Servicios</a>
+        <a href="#asistente" class="btn-outline">🤖 Consultá con IA</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong>+500</strong>
+          <span>Clientes en La Rioja</span>
+        </div>
+        <div class="hero-stat">
+          <strong>12+</strong>
+          <span>Años de trayectoria</span>
+        </div>
+        <div class="hero-stat">
+          <strong>100%</strong>
+          <span>Habilitados</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="hero-panel-title">🛡️ Nuestras certificaciones y cumplimiento</div>
+      <ul class="certif-list">
+        <li>
+          <span class="icon">✅</span>
+          <div>
+            <strong>Habilitación Municipal La Rioja Capital</strong>
+            Inscripción en Bromatología e Higiene del municipio. Director Técnico matriculado (Ing. Agrónomo / Bioquímico).
+          </div>
+        </li>
+        <li>
+          <span class="icon">✅</span>
+          <div>
+            <strong>SENASA — Registro Fitosanitario</strong>
+            Inscripción en el Registro de Empresas de Saneamiento Ambiental Urbano y Rural conforme normativa vigente.
+          </div>
+        </li>
+        <li>
+          <span class="icon">✅</span>
+          <div>
+            <strong>ANMAT — Productos domisanitarios</strong>
+            Todos los productos de venta cuentan con número de registro ANMAT vigente y ficha de seguridad.
+          </div>
+        </li>
+        <li>
+          <span class="icon">✅</span>
+          <div>
+            <strong>Ley Nacional 19.587 — Higiene y Seguridad</strong>
+            Cumplimiento del Art. 6 inc. C y Art. 9 del Dec. 351/79. Emisión de certificados con oblea oficial.
+          </div>
+        </li>
+        <li>
+          <span class="icon">✅</span>
+          <div>
+            <strong>Ley 11.843 — Profilaxis de la Peste</strong>
+            Servicio de desratización obligatorio en establecimientos comerciales, industriales y habitacionales.
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Lo que hacemos</div>
+        <h2 class="section-title">Servicios de Control<br>y Saneamiento</h2>
+        <p class="section-subtitle">Tratamientos profesionales con productos registrados ante ANMAT, aplicados por técnicos certificados con equipamiento homologado.</p>
+      </div>
+      <a href="#contacto" class="btn-primary">Pedir Turno →</a>
+    </div>
+
+    <div class="servicios-grid">
+
+      <div class="servicio-card">
+        <div class="servicio-img plagas">🪳</div>
+        <div class="servicio-body">
+          <div class="servicio-name">Control de Plagas Urbanas</div>
+          <div class="servicio-tags">
+            <span class="tag">Cucarachas</span>
+            <span class="tag">Hormigas</span>
+            <span class="tag">Mosquitos</span>
+            <span class="tag">Arañas</span>
+          </div>
+          <p class="servicio-desc">Desinsectación completa con productos biocidas autorizados. Incluye diagnóstico, tratamiento y certificado con oblea municipal. Eficacia garantizada con seguimiento a 30 días.</p>
+          <div class="servicio-precio">
+            <div>
+              <div class="precio-desde">Desde</div>
+              <div class="precio-val">$18.500</div>
+            </div>
+            <button class="btn-contratar" onclick="addToCart('Control de Plagas Urbanas', 18500, '🪳', 'Servicio')">Contratar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="servicio-card">
+        <div class="servicio-img desinfeccion">🧪</div>
+        <div class="servicio-body">
+          <div class="servicio-name">Desinfección Sanitaria</div>
+          <div class="servicio-tags">
+            <span class="tag">Ambientes</span>
+            <span class="tag">Superficies</span>
+            <span class="tag">COVID</span>
+            <span class="tag">SARS-CoV2</span>
+          </div>
+          <p class="servicio-desc">Nebulización y aspersión con desinfectantes de alto espectro. Recomendado para comercios, oficinas, establecimientos de salud y locales gastronómicos. Emitimos certificado oficial.</p>
+          <div class="servicio-precio">
+            <div>
+              <div class="precio-desde">Desde</div>
+              <div class="precio-val">$12.000</div>
+            </div>
+            <button class="btn-contratar" onclick="addToCart('Desinfección Sanitaria', 12000, '🧪', 'Servicio')">Contratar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="servicio-card">
+        <div class="servicio-img fumigacion">💨</div>
+        <div class="servicio-body">
+          <div class="servicio-name">Fumigación Profesional</div>
+          <div class="servicio-tags">
+            <span class="tag">Residencial</span>
+            <span class="tag">Industrial</span>
+            <span class="tag">Depósitos</span>
+          </div>
+          <p class="servicio-desc">Aplicación de fitosanitarios aprobados por SENASA. Director Técnico presente en cada aplicación. Furgón habilitado con leyenda "Transporte de sustancias tóxicas". Bitácora de aplicación incluida.</p>
+          <div class="servicio-precio">
+            <div>
+              <div class="precio-desde">Desde</div>
+              <div class="precio-val">$25.000</div>
+            </div>
+            <button class="btn-contratar" onclick="addToCart('Fumigación Profesional', 25000, '💨', 'Servicio')">Contratar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="servicio-card">
+        <div class="servicio-img jardin">🌿</div>
+        <div class="servicio-body">
+          <div class="servicio-name">Sanidad de Plantas y Jardines</div>
+          <div class="servicio-tags">
+            <span class="tag">Hongos</span>
+            <span class="tag">Insectos</span>
+            <span class="tag">Ácaros</span>
+            <span class="tag">Preventivo</span>
+          </div>
+          <p class="servicio-desc">Diagnóstico fitosanitario y tratamiento para plantas ornamentales, jardines y espacios verdes. Control de enfermedades fúngicas, bacterianas e infestaciones de insectos. Asesoramiento continuo.</p>
+          <div class="servicio-precio">
+            <div>
+              <div class="precio-desde">Desde</div>
+              <div class="precio-val">$9.500</div>
+            </div>
+            <button class="btn-contratar" onclick="addToCart('Sanidad de Plantas', 9500, '🌿', 'Servicio')">Contratar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="servicio-card">
+        <div class="servicio-img termitas">🪵</div>
+        <div class="servicio-body">
+          <div class="servicio-name">Control de Termitas y Roedores</div>
+          <div class="servicio-tags">
+            <span class="tag">Termitas</span>
+            <span class="tag">Ratas</span>
+            <span class="tag">Ratones</span>
+            <span class="tag">Ley 11.843</span>
+          </div>
+          <p class="servicio-desc">Desratización conforme a la Ley Nacional 11.843. Mapeo de cebaderas incluido (obligatorio para locales gastronómicos). Control de termitas con cebo-sistema o barrera química certificada.</p>
+          <div class="servicio-precio">
+            <div>
+              <div class="precio-desde">Desde</div>
+              <div class="precio-val">$22.000</div>
+            </div>
+            <button class="btn-contratar" onclick="addToCart('Control Termitas y Roedores', 22000, '🪵', 'Servicio')">Contratar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="servicio-card">
+        <div class="servicio-img industrial">🏭</div>
+        <div class="servicio-body">
+          <div class="servicio-name">Plan Industrial y Empresarial</div>
+          <div class="servicio-tags">
+            <span class="tag">HACCP</span>
+            <span class="tag">Auditoría</span>
+            <span class="tag">Mensual</span>
+            <span class="tag">Certificado</span>
+          </div>
+          <p class="servicio-desc">Plan integral de control de plagas para industrias alimenticias, hoteles, hospitales y establecimientos de alto riesgo. Incluye informes periódicos, auditoría HACCP y certificados para inspecciones.</p>
+          <div class="servicio-precio">
+            <div>
+              <div class="precio-desde">Plan mensual</div>
+              <div class="precio-val">$45.000</div>
+            </div>
+            <button class="btn-contratar" onclick="addToCart('Plan Industrial Mensual', 45000, '🏭', 'Servicio')">Contratar</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section id="productos">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Tienda</div>
+        <h2 class="section-title">Productos Registrados<br>para el Hogar y Empresa</h2>
+        <p class="section-subtitle">Solo vendemos productos con número de registro ANMAT vigente. Todos cuentan con Hoja de Seguridad (MSDS) disponible.</p>
+      </div>
+    </div>
+
+    <div class="productos-filtros">
+      <button class="filtro-btn active" onclick="filterProducts('todos', this)">Todos</button>
+      <button class="filtro-btn" onclick="filterProducts('insecticidas', this)">Insecticidas</button>
+      <button class="filtro-btn" onclick="filterProducts('desinfectantes', this)">Desinfectantes</button>
+      <button class="filtro-btn" onclick="filterProducts('rodenticidas', this)">Rodenticidas</button>
+      <button class="filtro-btn" onclick="filterProducts('plantas', this)">Fitosanitarios</button>
+    </div>
+
+    <div class="productos-grid" id="productosGrid">
+
+      <div class="producto-card" data-cat="insecticidas">
+        <span class="producto-badge-anmat">ANMAT ✓</span>
+        <div class="producto-img">🦟</div>
+        <div class="producto-body">
+          <div class="producto-name">Insecticida Concentrado Pro 500ml</div>
+          <div class="producto-reg">Reg. ANMAT Nº 14.234/2019 · Uso profesional</div>
+          <div class="producto-precio-row">
+            <div class="producto-precio">$3.800</div>
+            <button class="btn-add-cart" onclick="addToCart('Insecticida Concentrado Pro', 3800, '🦟', 'Producto')">+ 🛒</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="producto-card" data-cat="insecticidas">
+        <span class="producto-badge-anmat">ANMAT ✓</span>
+        <div class="producto-img">🪳</div>
+        <div class="producto-body">
+          <div class="producto-name">Gel Anti-Cucarachas 10g x6</div>
+          <div class="producto-reg">Reg. ANMAT Nº 09.445/2021 · Uso hogar/empresa</div>
+          <div class="producto-precio-row">
+            <div class="producto-precio">$2.200</div>
+            <button class="btn-add-cart" onclick="addToCart('Gel Anti-Cucarachas x6', 2200, '🪳', 'Producto')">+ 🛒</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="producto-card" data-cat="desinfectantes">
+        <span class="producto-badge-anmat">ANMAT ✓</span>
+        <div class="producto-img">🧴</div>
+        <div class="producto-body">
+          <div class="producto-name">Desinfectante Ambiental 1L</div>
+          <div class="producto-reg">Reg. ANMAT Nº 21.880/2022 · Amplio espectro</div>
+          <div class="producto-precio-row">
+            <div class="producto-precio">$4.500</div>
+            <button class="btn-add-cart" onclick="addToCart('Desinfectante Ambiental 1L', 4500, '🧴', 'Producto')">+ 🛒</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="producto-card" data-cat="desinfectantes">
+        <span class="producto-badge-anmat">ANMAT ✓</span>
+        <div class="producto-img">💧</div>
+        <div class="producto-body">
+          <div class="producto-name">Cloro Estabilizado 5L</div>
+          <div class="producto-reg">Reg. ANMAT Nº 17.002/2020 · Superficies</div>
+          <div class="producto-precio-row">
+            <div class="producto-precio">$3.100</div>
+            <button class="btn-add-cart" onclick="addToCart('Cloro Estabilizado 5L', 3100, '💧', 'Producto')">+ 🛒</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="producto-card" data-cat="rodenticidas">
+        <span class="producto-badge-anmat">ANMAT ✓</span>
+        <div class="producto-img">🐀</div>
+        <div class="producto-body">
+          <div class="producto-name">Rodenticida en Bloque 150g</div>
+          <div class="producto-reg">Reg. ANMAT Nº 08.321/2018 · Uso controlado</div>
+          <div class="producto-precio-row">
+            <div class="producto-precio">$1.800</div>
+            <button class="btn-add-cart" onclick="addToCart('Rodenticida en Bloque', 1800, '🐀', 'Producto')">+ 🛒</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="producto-card" data-cat="plantas">
+        <span class="producto-badge-anmat">SENASA ✓</span>
+        <div class="producto-img">🌱</div>
+        <div class="producto-body">
+          <div class="producto-name">Fungicida Sistémico Jardín 250ml</div>
+          <div class="producto-reg">Reg. SENASA Nº 32.456/2021 · Plantas ornamentales</div>
+          <div class="producto-precio-row">
+            <div class="producto-precio">$5.200</div>
+            <button class="btn-add-cart" onclick="addToCart('Fungicida Sistémico', 5200, '🌱', 'Producto')">+ 🛒</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="producto-card" data-cat="plantas">
+        <span class="producto-badge-anmat">SENASA ✓</span>
+        <div class="producto-img">🍃</div>
+        <div class="producto-body">
+          <div class="producto-name">Acaricida Natural 500ml</div>
+          <div class="producto-reg">Reg. SENASA Nº 28.990/2023 · Bajo impacto</div>
+          <div class="producto-precio-row">
+            <div class="producto-precio">$4.900</div>
+            <button class="btn-add-cart" onclick="addToCart('Acaricida Natural', 4900, '🍃', 'Producto')">+ 🛒</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="producto-card" data-cat="insecticidas">
+        <span class="producto-badge-anmat">ANMAT ✓</span>
+        <div class="producto-img">🐜</div>
+        <div class="producto-body">
+          <div class="producto-name">Hormiguicida Granulado 500g</div>
+          <div class="producto-reg">Reg. ANMAT Nº 11.567/2022 · Nidos y hormigueros</div>
+          <div class="producto-precio-row">
+            <div class="producto-precio">$2.600</div>
+            <button class="btn-add-cart" onclick="addToCart('Hormiguicida Granulado', 2600, '🐜', 'Producto')">+ 🛒</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ASISTENTE IA -->
+<section id="asistente">
+  <div class="container">
+    <div class="ia-wrapper">
+      <div class="ia-info">
+        <div class="section-label">Innovación</div>
+        <h2 class="section-title" style="color:white">Consultá con nuestro<br>Asistente IA 24/7</h2>
+        <p class="ia-desc">
+          Nuestro asistente de inteligencia artificial te ayuda a identificar qué tipo de plaga o problema fitosanitario tenés, qué servicio necesitás y qué productos son los indicados. Disponible las 24 horas, los 7 días de la semana.
+        </p>
+        <ul class="ia-features">
+          <li><span class="check">✓</span> Diagnóstico orientativo de plagas por descripción o foto</li>
+          <li><span class="check">✓</span> Recomendación de servicio según tu tipo de propiedad</li>
+          <li><span class="check">✓</span> Consultas sobre normativa y certificados requeridos</li>
+          <li><span class="check">✓</span> Guía de productos autorizados para uso doméstico</li>
+          <li><span class="check">✓</span> Derivación directa a nuestro equipo técnico</li>
+        </ul>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <button class="btn-primary" onclick="document.querySelector('.chat-input').focus()">💬 Iniciar consulta</button>
+          <a href="https://wa.me/5438000001234" class="btn-outline" style="color:rgba(255,255,255,0.8)">📱 WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="chat-widget">
+        <div class="chat-header">
+          <div class="chat-avatar">🌿</div>
+          <div>
+            <div class="chat-name">BioBot — Asistente BioSanear</div>
+            <div class="chat-status">
+              <span class="chat-status-dot"></span> En línea · IA especializada
+            </div>
+          </div>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="msg bot">
+            <div class="msg-icon">🌿</div>
+            <div class="msg-bubble">¡Hola! Soy BioBot, el asistente de BioSanear La Rioja 👋 Podés contarme qué plaga o problema tenés, describir qué viste en tu casa o jardín, o consultarme sobre nuestros servicios y productos. ¿En qué te ayudo hoy?</div>
+          </div>
+        </div>
+        <div class="typing-indicator" id="typingIndicator" style="padding:0 1.25rem 0.5rem">
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+        </div>
+        <div class="chat-input-area">
+          <input type="text" class="chat-input" id="chatInput" placeholder="Ej: Tengo cucarachas en la cocina..." onkeydown="if(event.key==='Enter') sendMessage()">
+          <button class="chat-send" onclick="sendMessage()">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NORMATIVA -->
+<section id="normativa">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Transparencia legal</div>
+        <h2 class="section-title">Cumplimiento Normativo<br>en Argentina y La Rioja</h2>
+      </div>
+    </div>
+
+    <div class="normativa-grid">
+      <div class="normativa-card">
+        <div class="normativa-card-icon">🏛️</div>
+        <h3>Leyes Nacionales</h3>
+        <p>Nuestro servicio cumple con toda la legislación federal de la República Argentina aplicable al sector.</p>
+        <ul class="normativa-list">
+          <li><strong>Ley 19.587</strong> — Higiene y Seguridad en el Trabajo (Dec. 351/79, Art. 6 y 9)</li>
+          <li><strong>Ley 11.843</strong> — Profilaxis de la Peste: desratización obligatoria</li>
+          <li><strong>Ley 27.233</strong> — Sanidad y Calidad Agroalimentaria (SENASA)</li>
+          <li>Registro SENASA para empresas de Saneamiento Ambiental Urbano y Rural</li>
+          <li>Todos los productos ANMAT o SENASA según categoría (domisanitarios/fitosanitarios)</li>
+        </ul>
+      </div>
+
+      <div class="normativa-card">
+        <div class="normativa-card-icon">🏙️</div>
+        <h3>Normativa Provincial y Municipal</h3>
+        <p>Cumplimiento de la normativa específica de La Rioja provincia y el municipio de La Rioja Capital.</p>
+        <ul class="normativa-list">
+          <li><strong>Ley Provincial 8355/08</strong> — Ley de Medio Ambiente La Rioja</li>
+          <li>Habilitación ante Bromatología e Higiene de la Municipalidad de La Rioja</li>
+          <li>Director Técnico matriculado en Colegio Profesional de La Rioja</li>
+          <li>Domicilio legal de oficina comercial y depósito habilitados en el ejido municipal</li>
+          <li>Certificado de Aptitud Ambiental municipal para depósito de productos</li>
+        </ul>
+      </div>
+
+      <div class="normativa-card">
+        <div class="normativa-card-icon">📄</div>
+        <h3>Documentación en Cada Servicio</h3>
+        <p>Entregamos toda la documentación requerida por los organismos de control.</p>
+        <ul class="normativa-list">
+          <li>Certificado de tratamiento con oblea oficial (validez 30 días para locales comerciales)</li>
+          <li>Mapeo de cebaderas para locales gastronómicos (obligatorio inspecciones SENASA)</li>
+          <li>Bitácora de aplicación: producto, dosis, maquinaria utilizada y técnico responsable</li>
+          <li>Hoja de Seguridad (MSDS) de todos los productos aplicados</li>
+          <li>Datos del Director Técnico y número de habilitación municipal</li>
+        </ul>
+      </div>
+
+      <div class="normativa-card">
+        <div class="normativa-card-icon">🚛</div>
+        <h3>Equipamiento y Transporte</h3>
+        <p>Vehículos y equipos habilitados según la normativa vigente para transporte de sustancias fitosanitarias.</p>
+        <ul class="normativa-list">
+          <li>Furgón con habitáculo del conductor separado físicamente de la carga</li>
+          <li>Leyenda lateral: "Transporte de sustancias tóxicas – plaguicidas"</li>
+          <li>Matafuegos y kit anti-derrame a bordo</li>
+          <li>Maquinaria identificada con marca, número de serie y dominio</li>
+          <li>Personal operativo con carné de usuario profesional vigente</li>
+        </ul>
+      </div>
+
+      <div class="normativa-highlight">
+        <div>
+          <h3>¿Su empresa necesita certificado de fumigación?</h3>
+          <p>La Ley Nacional 19.587 y la Ordenanza de Habilitaciones exigen que todo local comercial con empleados posea certificado de control de plagas vigente. El incumplimiento puede resultar en sanciones del municipio y SENASA. Nosotros nos encargamos de toda la documentación.</p>
+        </div>
+        <button class="btn-normativa" onclick="openPresupuesto()">Solicitar certificado →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="container">
+    <div class="contacto-grid">
+      <div class="contacto-info">
+        <div class="section-label">Contacto</div>
+        <h3 class="section-title">¿Hablamos?</h3>
+        <p>Atendemos en La Rioja Capital y alrededores. Presupuesto sin cargo. Respondemos dentro de las 2 horas hábiles.</p>
+        <div class="contacto-datos">
+          <div class="contacto-dato">
+            <div class="contacto-dato-icon">📍</div>
+            <span>La Rioja Capital, La Rioja, Argentina</span>
+          </div>
+          <div class="contacto-dato">
+            <div class="contacto-dato-icon">📞</div>
+            <span>(0380) 4XX-XXXX / (0380) 15-4XX-XXXX</span>
+          </div>
+          <div class="contacto-dato">
+            <div class="contacto-dato-icon">📱</div>
+            <span>WhatsApp: +54 380 X-XXXXXX</span>
+          </div>
+          <div class="contacto-dato">
+            <div class="contacto-dato-icon">📧</div>
+            <span>info@biosanearrioja.com.ar</span>
+          </div>
+          <div class="contacto-dato">
+            <div class="contacto-dato-icon">🕐</div>
+            <span>Lun–Vie 8:00–18:00 · Sáb 9:00–13:00</span>
+          </div>
+        </div>
+        <div class="anmat-badge">🛡️ Empresa habilitada · Hab. Municipal La Rioja</div>
+      </div>
+
+      <div>
+        <div class="form-grid">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Nombre y apellido *</label>
+              <input class="form-input" type="text" placeholder="Juan Pérez">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Teléfono *</label>
+              <input class="form-input" type="tel" placeholder="(0380) 15-XXXXXXX">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Correo electrónico</label>
+            <input class="form-input" type="email" placeholder="ejemplo@email.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tipo de servicio</label>
+            <select class="form-select">
+              <option value="">Seleccioná un servicio...</option>
+              <option>Control de Plagas Urbanas</option>
+              <option>Desinfección Sanitaria</option>
+              <option>Fumigación Profesional</option>
+              <option>Sanidad de Plantas y Jardines</option>
+              <option>Control de Termitas y Roedores</option>
+              <option>Plan Industrial y Empresarial</option>
+              <option>Compra de productos</option>
+              <option>Consulta general</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tipo de inmueble</label>
+            <select class="form-select">
+              <option value="">Seleccioná...</option>
+              <option>Casa / Departamento</option>
+              <option>Local comercial</option>
+              <option>Restaurante / Bar</option>
+              <option>Industria / Depósito</option>
+              <option>Hotel / Hospedaje</option>
+              <option>Institución educativa</option>
+              <option>Establecimiento de salud</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Descripción del problema</label>
+            <textarea class="form-textarea" placeholder="Contanos qué viste, dónde, desde cuándo... cuanta más info, mejor presupuesto podemos ofrecerte."></textarea>
+          </div>
+          <button class="form-submit" onclick="submitForm()">📩 Enviar consulta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-brand">
+      <div class="nav-logo" style="text-decoration:none;display:flex;align-items:center;gap:10px;margin-bottom:0.5rem">
+        <div class="nav-logo-icon">🌿</div>
+        <span style="font-family:'Syne',sans-serif;font-weight:800;color:white;">Bio<span style="color:var(--verde-neon)">Sanear</span></span>
+      </div>
+      <p>Empresa de control de plagas y desinfección profesional en La Rioja Capital. Habilitados por Bromatología Municipal, SENASA y ANMAT. Director Técnico matriculado.</p>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <span class="anmat-badge">SENASA ✓</span>
+        <span class="anmat-badge">ANMAT ✓</span>
+        <span class="anmat-badge">Hab. Municipal ✓</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#servicios">Control de Plagas</a></li>
+        <li><a href="#servicios">Desinfección</a></li>
+        <li><a href="#servicios">Fumigación</a></li>
+        <li><a href="#servicios">Sanidad Vegetal</a></li>
+        <li><a href="#servicios">Plan Empresarial</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#normativa">Normativa</a></li>
+        <li><a href="#asistente">Asistente IA</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#">Aviso Legal</a></li>
+        <li><a href="#">Política de Privacidad</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Productos</h4>
+      <ul>
+        <li><a href="#productos">Insecticidas ANMAT</a></li>
+        <li><a href="#productos">Desinfectantes</a></li>
+        <li><a href="#productos">Rodenticidas</a></li>
+        <li><a href="#productos">Fitosanitarios</a></li>
+        <li><a href="#productos">Ver catálogo</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 BioSanear La Rioja. Todos los derechos reservados.</span>
+    <span>Hab. Municipal La Rioja Nº XXXX/2023 · CUIT: 30-XXXXXXXX-X · <a href="#">info@biosanearrioja.com.ar</a></span>
+  </div>
+</footer>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-panel-header">
+    <h3>🛒 Tu carrito</h3>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItemsList">
+    <div class="cart-empty">
+      <div class="cart-empty-icon">🛒</div>
+      <p>Tu carrito está vacío</p>
+      <p style="font-size:0.8rem;opacity:0.6">Agregá servicios o productos para comenzar</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total estimado</span>
+      <span class="cart-total-value" id="cartTotal">$0</span>
+    </div>
+    <p style="font-size:0.72rem;color:var(--gris);margin-bottom:1rem">* Los servicios pueden requerir visita de diagnóstico. El precio final se confirma por presupuesto.</p>
+    <button class="btn-checkout" onclick="checkout()">💬 Confirmar vía WhatsApp →</button>
+  </div>
+</div>
+
+<!-- PRESUPUESTO MODAL -->
+<div class="modal-overlay" id="presupuestoModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closePresupuesto()">✕</button>
+    <h2 class="modal-title">📋 Solicitar Presupuesto</h2>
+    <p class="modal-sub">Completá tus datos y te enviamos un presupuesto personalizado sin costo.</p>
+    <div class="form-grid">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Nombre *</label>
+          <input class="form-input" type="text" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Teléfono *</label>
+          <input class="form-input" type="tel" placeholder="(0380) 15-XXXXXX">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Servicio que necesitás</label>
+        <select class="form-select">
+          <option>Control de Plagas Urbanas</option>
+          <option>Desinfección Sanitaria</option>
+          <option>Fumigación Profesional</option>
+          <option>Sanidad de Plantas</option>
+          <option>Plan Industrial</option>
+        </select>
+      </div>
+      <button class="form-submit" onclick="submitPresupuesto()">Enviar solicitud →</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ Agregado al carrito</div>
+
+<script>
+// =====================
+// CART LOGIC
+// =====================
+let cart = [];
+
+function addToCart(name, price, icon, type) {
+  const existing = cart.find(i => i.name === name);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ name, price, icon, type, qty: 1 });
+  }
+  updateCartUI();
+  showToast(`"${name}" agregado al carrito`);
+}
+
+function removeFromCart(name) {
+  cart = cart.filter(i => i.name !== name);
+  updateCartUI();
+}
+
+function changeQty(name, delta) {
+  const item = cart.find(i => i.name === name);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) removeFromCart(name);
+  else updateCartUI();
+}
+
+function updateCartUI() {
+  const count = cart.reduce((sum, i) => sum + i.qty, 0);
+  const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+
+  const badge = document.getElementById('cartBadge');
+  const countNav = document.getElementById('cartCountNav');
+
+  if (count > 0) {
+    badge.style.display = 'flex';
+    badge.textContent = count;
+    countNav.style.display = 'inline';
+    countNav.textContent = count;
+  } else {
+    badge.style.display = 'none';
+    countNav.style.display = 'none';
+  }
+
+  const listEl = document.getElementById('cartItemsList');
+  const footerEl = document.getElementById('cartFooter');
+  const totalEl = document.getElementById('cartTotal');
+
+  if (cart.length === 0) {
+    listEl.innerHTML = `<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>Tu carrito está vacío</p><p style="font-size:0.8rem;opacity:0.6">Agregá servicios o productos para comenzar</p></div>`;
+    footerEl.style.display = 'none';
+  } else {
+    listEl.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <div class="cart-item-icon">${item.icon}</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-type">${item.type}</div>
+          <div class="cart-qty">
+            <button onclick="changeQty('${item.name}',-1)">−</button>
+            <span>${item.qty}</span>
+            <button onclick="changeQty('${item.name}',1)">+</button>
+          </div>
+        </div>
+        <div>
+          <div class="cart-item-price">$${(item.price * item.qty).toLocaleString('es-AR')}</div>
+          <button class="cart-item-remove" onclick="removeFromCart('${item.name}')">🗑️</button>
+        </div>
+      </div>
+    `).join('');
+    footerEl.style.display = 'block';
+    totalEl.textContent = '$' + total.toLocaleString('es-AR');
+  }
+}
+
+function toggleCart() {
+  const overlay = document.getElementById('cartOverlay');
+  const panel = document.getElementById('cartPanel');
+  overlay.classList.toggle('open');
+  panel.classList.toggle('open');
+}
+
+function checkout() {
+  if (cart.length === 0) return;
+  const items = cart.map(i => `• ${i.name} x${i.qty}: $${(i.price*i.qty).toLocaleString('es-AR')}`).join('\n');
+  const total = cart.reduce((sum,i) => sum+i.price*i.qty, 0);
+  const msg = encodeURIComponent(`Hola BioSanear! Quiero confirmar el siguiente pedido:\n\n${items}\n\nTotal estimado: $${total.toLocaleString('es-AR')}\n\n¿Podrían confirmar disponibilidad?`);
+  window.open(`https://wa.me/5438000001234?text=${msg}`, '_blank');
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = '✅ ' + msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2800);
+}
+
+// =====================
+// PRODUCT FILTER
+// =====================
+function filterProducts(cat, btn) {
+  document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.producto-card').forEach(card => {
+    card.style.display = (cat === 'todos' || card.dataset.cat === cat) ? 'block' : 'none';
+  });
+}
+
+// =====================
+// MODALS
+// =====================
+function openPresupuesto() {
+  document.getElementById('presupuestoModal').classList.add('open');
+}
+
+function closePresupuesto() {
+  document.getElementById('presupuestoModal').classList.remove('open');
+}
+
+document.getElementById('presupuestoModal').addEventListener('click', function(e) {
+  if (e.target === this) closePresupuesto();
+});
+
+function submitPresupuesto() {
+  showToast('¡Solicitud enviada! Te contactamos pronto.');
+  closePresupuesto();
+}
+
+function submitForm() {
+  showToast('¡Consulta enviada! Te respondemos en 2 hs.');
+}
+
+// =====================
+// AI CHAT
+// =====================
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+
+  appendMsg('user', msg, '👤');
+
+  const typing = document.getElementById('typingIndicator');
+  typing.classList.add('show');
+
+  const systemPrompt = `Sos BioBot, el asistente virtual de BioSanear La Rioja, empresa de desinfección, control de plagas y sanidad vegetal en La Rioja Capital, Argentina. Tu rol es:
+- Ayudar a identificar tipos de plagas (cucarachas, hormigas, roedores, mosquitos, termitas, hongos en plantas, etc.)
+- Recomendar cuál de nuestros servicios es más adecuado: Control de Plagas Urbanas ($18.500), Desinfección Sanitaria ($12.000), Fumigación Profesional ($25.000), Sanidad de Plantas ($9.500), Control Termitas y Roedores ($22.000), Plan Industrial ($45.000/mes)
+- Explicar la normativa argentina relevante: Ley 19.587, Ley 11.843, SENASA, ANMAT
+- Recomendar productos cuando sea apropiado
+- Invitar al usuario a pedir un presupuesto o contactarnos por WhatsApp
+Respondé en español rioplatense, de forma amigable, concisa y profesional. No más de 3-4 oraciones por respuesta. Si el usuario describe una situación, primero mencioná qué tipo de plaga/problema puede ser, luego qué servicio les conviene.`;
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: [{ role: 'user', content: msg }]
+      })
+    });
+
+    const data = await resp.json();
+    typing.classList.remove('show');
+
+    const reply = data.content?.[0]?.text || 'Lo siento, tuve un problema al responder. Contactanos directamente por WhatsApp.';
+    appendMsg('bot', reply, '🌿');
+  } catch {
+    typing.classList.remove('show');
+    appendMsg('bot', 'Hubo un error de conexión. Por favor, contactanos directamente por WhatsApp o teléfono.', '🌿');
+  }
+}
+
+function appendMsg(role, text, icon) {
+  const container = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+  div.innerHTML = `<div class="msg-icon">${icon}</div><div class="msg-bubble">${text}</div>`;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+</script>
+
+</body>
+</html>
