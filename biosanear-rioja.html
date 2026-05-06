@@ -70,20 +70,87 @@
     color: var(--verde-neon);
   }
 
+  /* === MENU DESPLEGABLE === */
   .nav-links {
-    display: flex; align-items: center; gap: 2rem;
+    display: flex; align-items: center; gap: 0;
     list-style: none;
   }
 
-  .nav-links a {
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-item > a {
     color: rgba(255,255,255,0.75);
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
     transition: color 0.2s;
+    padding: 0 1rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
 
-  .nav-links a:hover { color: var(--verde-neon); }
+  .nav-item > a:hover {
+    color: var(--verde-neon);
+  }
+
+  .dropdown-arrow {
+    font-size: 0.7rem;
+    transition: transform 0.3s;
+    display: inline-block;
+  }
+
+  .nav-item.open > a .dropdown-arrow {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    background: rgba(13,18,5,0.95);
+    border: 1px solid rgba(77,187,104,0.2);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    min-width: 220px;
+    padding: 0.5rem 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+
+  .nav-item.open .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-menu a {
+    display: block;
+    padding: 12px 1.5rem;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+  }
+
+  .dropdown-menu a:hover {
+    background: rgba(77,187,104,0.1);
+    color: var(--verde-neon);
+    border-left-color: var(--verde-neon);
+    padding-left: calc(1.5rem + 3px);
+  }
+
+  .dropdown-menu .icon {
+    margin-right: 8px;
+    font-size: 1rem;
+  }
 
   .nav-actions {
     display: flex; align-items: center; gap: 1rem;
@@ -998,378 +1065,183 @@
   }
 
   .cart-total-row {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 1.25rem;
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
   }
 
-  .cart-total-label { color: var(--gris); font-size: 0.875rem; }
-
-  .cart-total-value {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 1.4rem;
+  .cart-total-row strong {
+    font-size: 1.2rem;
     color: var(--verde);
   }
 
   .btn-checkout {
-    width: 100%;
     background: var(--verde);
     color: white;
-    padding: 14px;
+    padding: 12px 24px;
     border-radius: 10px;
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    width: 100%;
     border: none;
     cursor: pointer;
-    font-family: 'Syne', sans-serif;
     transition: all 0.2s;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: 'Syne', sans-serif;
   }
 
   .btn-checkout:hover { background: var(--verde-claro); }
 
-  /* === CONTACTO === */
-  #contacto { background: white; }
-
-  .contacto-grid {
-    display: grid; grid-template-columns: 1fr 1.2fr;
-    gap: 4rem; align-items: start;
-  }
-
-  .contacto-info h3 {
-    font-size: 1.5rem; margin-bottom: 1rem;
-  }
-
-  .contacto-info p {
-    color: var(--gris);
-    line-height: 1.7;
-    font-size: 0.9rem;
-    margin-bottom: 2rem;
-  }
-
-  .contacto-datos {
-    display: flex; flex-direction: column; gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .contacto-dato {
-    display: flex; align-items: center; gap: 12px;
-    font-size: 0.875rem;
-    color: var(--negro);
-  }
-
-  .contacto-dato-icon {
-    width: 36px; height: 36px;
-    background: var(--crema);
-    border: 1px solid var(--crema-oscuro);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.95rem;
-    flex-shrink: 0;
-  }
-
-  .form-grid { display: flex; flex-direction: column; gap: 1rem; }
-
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-  .form-group { display: flex; flex-direction: column; gap: 6px; }
-
-  .form-label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--negro);
-    letter-spacing: 0.02em;
-  }
-
-  .form-input, .form-select, .form-textarea {
-    background: var(--crema);
-    border: 1px solid var(--crema-oscuro);
-    border-radius: 10px;
-    padding: 12px 14px;
-    font-size: 0.875rem;
-    font-family: 'DM Sans', sans-serif;
-    color: var(--negro);
-    outline: none;
-    transition: border-color 0.2s;
-    width: 100%;
-  }
-
-  .form-input:focus, .form-select:focus, .form-textarea:focus {
-    border-color: var(--verde);
-    background: white;
-  }
-
-  .form-textarea { resize: vertical; min-height: 100px; }
-
-  .form-submit {
-    background: var(--verde);
-    color: white;
-    padding: 14px 28px;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 0.95rem;
-    border: none;
-    cursor: pointer;
-    font-family: 'Syne', sans-serif;
-    transition: all 0.2s;
-    width: 100%;
-  }
-
-  .form-submit:hover { background: var(--verde-claro); }
-
-  /* === FOOTER === */
-  footer {
-    background: var(--negro);
-    color: rgba(255,255,255,0.6);
-    padding: 3rem 2rem;
-  }
-
-  .footer-content {
-    max-width: 1200px; margin: 0 auto;
-    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 3rem;
-    padding-bottom: 2.5rem;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    margin-bottom: 2rem;
-  }
-
-  .footer-brand p {
-    font-size: 0.85rem;
-    line-height: 1.6;
-    margin-top: 1rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .footer-col h4 {
-    color: white;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 1rem;
-  }
-
-  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-
-  .footer-col a {
-    color: rgba(255,255,255,0.55);
-    text-decoration: none;
-    font-size: 0.85rem;
-    transition: color 0.2s;
-  }
-
-  .footer-col a:hover { color: var(--verde-neon); }
-
-  .footer-bottom {
-    max-width: 1200px; margin: 0 auto;
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 0.78rem;
-    flex-wrap: wrap; gap: 0.75rem;
-  }
-
-  .footer-bottom a { color: var(--verde-neon); text-decoration: none; }
-
-  .anmat-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(77,187,104,0.1);
-    border: 1px solid rgba(77,187,104,0.2);
-    border-radius: 6px;
-    padding: 4px 10px;
-    font-size: 0.72rem;
-    color: var(--verde-neon);
-    font-weight: 600;
-  }
-
-  /* Toast */
-  .toast {
-    position: fixed; bottom: 2rem; left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: var(--verde);
-    color: white;
-    padding: 12px 20px;
-    border-radius: 10px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    z-index: 3000;
-    transition: transform 0.3s;
-    display: flex; align-items: center; gap: 8px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    white-space: nowrap;
-  }
-
-  .toast.show { transform: translateX(-50%) translateY(0); }
-
-  /* Presupuesto Modal */
-  .modal-overlay {
-    position: fixed; inset: 0; z-index: 2000;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px);
-    display: none; align-items: center; justify-content: center;
-    padding: 1rem;
-  }
-
-  .modal-overlay.open { display: flex; }
-
-  .modal-box {
-    background: white;
-    border-radius: 20px;
-    padding: 2.5rem;
-    width: 100%; max-width: 560px;
-    position: relative;
-  }
-
-  .modal-close {
-    position: absolute; top: 1rem; right: 1rem;
-    background: var(--crema); border: none;
-    width: 32px; height: 32px;
-    border-radius: 6px;
-    cursor: pointer; font-size: 1rem; color: var(--gris);
-    display: flex; align-items: center; justify-content: center;
-  }
-
-  .modal-close:hover { background: var(--crema-oscuro); }
-
-  .modal-title {
-    font-size: 1.4rem; margin-bottom: 0.5rem;
-  }
-
-  .modal-sub {
-    color: var(--gris); font-size: 0.875rem; margin-bottom: 1.5rem;
-  }
-
-  /* Responsive */
-  @media (max-width: 900px) {
-    .hero-content { grid-template-columns: 1fr; gap: 2rem; }
-    .servicios-grid { grid-template-columns: 1fr 1fr; }
-    .productos-grid { grid-template-columns: 1fr 1fr; }
-    .ia-wrapper { grid-template-columns: 1fr; }
+  @media (max-width: 768px) {
+    .servicios-grid, .productos-grid { grid-template-columns: 1fr; }
+    .hero-content { grid-template-columns: 1fr; }
     .normativa-grid { grid-template-columns: 1fr; }
-    .contacto-grid { grid-template-columns: 1fr; }
-    .footer-content { grid-template-columns: 1fr 1fr; }
+    .ia-wrapper { grid-template-columns: 1fr; }
+    .nav-links { gap: 0; }
+    .nav-item > a { padding: 0 0.75rem; }
     .hero h1 { font-size: 2.5rem; }
-    .nav-links { display: none; }
-  }
-
-  @media (max-width: 600px) {
-    .servicios-grid { grid-template-columns: 1fr; }
-    .productos-grid { grid-template-columns: 1fr 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-    .footer-content { grid-template-columns: 1fr; }
-    .hero h1 { font-size: 2rem; }
-    section { padding: 3.5rem 1rem; }
-    .cart-panel { width: 100%; }
-  }
-
-  .nav-menu-btn {
-    display: none;
-    background: none;
-    border: 1px solid rgba(255,255,255,0.2);
-    color: white;
-    padding: 6px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-
-  @media (max-width: 900px) {
-    .nav-menu-btn { display: flex; align-items: center; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAVIGATION -->
+<!-- === NAVEGACIÓN CON MENÚS DESPLEGABLES === -->
 <nav>
   <a href="#" class="nav-logo">
     <div class="nav-logo-icon">🌿</div>
-    <span>Bio<em>Sanear</em></span>
+    <span><em>Bio</em>Sanear</span>
   </a>
-  <ul class="nav-links">
-    <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#productos">Productos</a></li>
-    <li><a href="#asistente">Asistente IA</a></li>
-    <li><a href="#normativa">Normativa</a></li>
-    <li><a href="#contacto">Contacto</a></li>
+  
+  <ul class="nav-links" id="navLinks">
+    <!-- SERVICIOS -->
+    <li class="nav-item" data-section="servicios">
+      <a href="#servicios">
+        <span>🛠️ Servicios</span>
+        <span class="dropdown-arrow">▼</span>
+      </a>
+      <div class="dropdown-menu">
+        <a href="#servicios"><span class="icon">🐛</span> Control de Plagas</a>
+        <a href="#servicios"><span class="icon">🧼</span> Desinfección</a>
+        <a href="#servicios"><span class="icon">💨</span> Fumigación</a>
+        <a href="#servicios"><span class="icon">🌱</span> Cuidado de Jardín</a>
+        <a href="#servicios"><span class="icon">🪲</span> Eliminación de Termitas</a>
+        <a href="#servicios"><span class="icon">🏭</span> Tratamientos Industriales</a>
+      </div>
+    </li>
+
+    <!-- PRODUCTOS -->
+    <li class="nav-item" data-section="productos">
+      <a href="#productos">
+        <span>🛍️ Productos</span>
+        <span class="dropdown-arrow">▼</span>
+      </a>
+      <div class="dropdown-menu">
+        <a href="#productos"><span class="icon">💊</span> Insecticidas</a>
+        <a href="#productos"><span class="icon">🧴</span> Desinfectantes</a>
+        <a href="#productos"><span class="icon">🪴</span> Productos Naturales</a>
+        <a href="#productos"><span class="icon">🧰</span> Accesorios</a>
+        <a href="#productos"><span class="icon">📦</span> Kits Completos</a>
+      </div>
+    </li>
+
+    <!-- CONSULTAS Y DUDAS -->
+    <li class="nav-item" data-section="asistente">
+      <a href="#asistente">
+        <span>💬 Consultas</span>
+        <span class="dropdown-arrow">▼</span>
+      </a>
+      <div class="dropdown-menu">
+        <a href="#asistente"><span class="icon">🤖</span> Asistente IA</a>
+        <a href="#asistente"><span class="icon">❓</span> Preguntas Frecuentes</a>
+        <a href="#asistente"><span class="icon">📞</span> Contacto Directo</a>
+        <a href="#asistente"><span class="icon">📧</span> Email Support</a>
+      </div>
+    </li>
+
+    <!-- AUTORIZACIONES Y NORMATIVA -->
+    <li class="nav-item" data-section="normativa">
+      <a href="#normativa">
+        <span>📋 Normativa</span>
+        <span class="dropdown-arrow">▼</span>
+      </a>
+      <div class="dropdown-menu">
+        <a href="#normativa"><span class="icon">⚖️</span> Regulaciones Legales</a>
+        <a href="#normativa"><span class="icon">✅</span> Certificaciones</a>
+        <a href="#normativa"><span class="icon">📄</span> Términos y Condiciones</a>
+        <a href="#normativa"><span class="icon">🔒</span> Privacidad y Datos</a>
+        <a href="#normativa"><span class="icon">🏆</span> Autorizaciones SENASA</a>
+      </div>
+    </li>
   </ul>
+
   <div class="nav-actions">
-    <button class="btn-cart" onclick="toggleCart()">
-      🛒 <span id="cartCountNav" style="font-size:0.8rem;font-weight:700;display:none"></span>
+    <button class="btn-cart" id="cartBtn">
+      🛒
       <span class="cart-badge" id="cartBadge">0</span>
     </button>
-    <button class="btn-presupuesto" onclick="openPresupuesto()">Pedir Presupuesto</button>
+    <button class="btn-presupuesto">Solicitar Presupuesto</button>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero" id="inicio">
+<!-- === HERO === -->
+<section class="hero">
   <div class="hero-bg-pattern"></div>
   <div class="hero-grid-lines"></div>
   <div class="hero-content">
     <div>
       <div class="hero-badge">
         <span class="hero-badge-dot"></span>
-        La Rioja Capital · Habilitados ANMAT · SENASA
+        Soluciones Certificadas
       </div>
-      <h1>Control de Plagas y <span class="accent">Desinfección</span> Profesional</h1>
-      <p class="hero-desc">
-        Servicio certificado conforme a la Ley Nacional 19.587, normativa ambiental provincial Ley 8355/08 y habilitación municipal de La Rioja. Productos registrados ante ANMAT y SENASA. Técnicos matriculados con Director Técnico acreditado.
-      </p>
+      <h1>Control de <span class="accent">Plagas</span> Profesional</h1>
+      <p class="hero-desc">Protege tu hogar, negocio e instalaciones con nuestros servicios de desinsectación y desinfección. Garantizados por los máximos estándares sanitarios.</p>
       <div class="hero-ctas">
-        <a href="#servicios" class="btn-primary">🔬 Ver Servicios</a>
-        <a href="#asistente" class="btn-outline">🤖 Consultá con IA</a>
+        <button class="btn-primary">Ver Servicios</button>
+        <button class="btn-outline">Más Información</button>
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
-          <strong>+500</strong>
-          <span>Clientes en La Rioja</span>
+          <strong>15+</strong>
+          <span>Años de experiencia</span>
         </div>
         <div class="hero-stat">
-          <strong>12+</strong>
-          <span>Años de trayectoria</span>
+          <strong>5000+</strong>
+          <span>Clientes satisfechos</span>
         </div>
         <div class="hero-stat">
           <strong>100%</strong>
-          <span>Habilitados</span>
+          <span>Garantizado</span>
         </div>
       </div>
     </div>
     <div class="hero-panel">
-      <div class="hero-panel-title">🛡️ Nuestras certificaciones y cumplimiento</div>
+      <h3 class="hero-panel-title">🏅 Certificaciones</h3>
       <ul class="certif-list">
         <li>
-          <span class="icon">✅</span>
+          <span class="icon">✓</span>
           <div>
-            <strong>Habilitación Municipal La Rioja Capital</strong>
-            Inscripción en Bromatología e Higiene del municipio. Director Técnico matriculado (Ing. Agrónomo / Bioquímico).
+            <strong>SENASA</strong>
+            Autorización Oficial
           </div>
         </li>
         <li>
-          <span class="icon">✅</span>
+          <span class="icon">✓</span>
           <div>
-            <strong>SENASA — Registro Fitosanitario</strong>
-            Inscripción en el Registro de Empresas de Saneamiento Ambiental Urbano y Rural conforme normativa vigente.
+            <strong>ISO 9001</strong>
+            Calidad Certificada
           </div>
         </li>
         <li>
-          <span class="icon">✅</span>
+          <span class="icon">✓</span>
           <div>
-            <strong>ANMAT — Productos domisanitarios</strong>
-            Todos los productos de venta cuentan con número de registro ANMAT vigente y ficha de seguridad.
+            <strong>ANMAT</strong>
+            Productos Autorizados
           </div>
         </li>
         <li>
-          <span class="icon">✅</span>
+          <span class="icon">✓</span>
           <div>
-            <strong>Ley Nacional 19.587 — Higiene y Seguridad</strong>
-            Cumplimiento del Art. 6 inc. C y Art. 9 del Dec. 351/79. Emisión de certificados con oblea oficial.
-          </div>
-        </li>
-        <li>
-          <span class="icon">✅</span>
-          <div>
-            <strong>Ley 11.843 — Profilaxis de la Peste</strong>
-            Servicio de desratización obligatorio en establecimientos comerciales, industriales y habitacionales.
+            <strong>Seguros</strong>
+            Responsabilidad Civil
           </div>
         </li>
       </ul>
@@ -1377,58 +1249,52 @@
   </div>
 </section>
 
-<!-- SERVICIOS -->
+<!-- === SERVICIOS === -->
 <section id="servicios">
   <div class="container">
     <div class="section-header">
       <div>
-        <div class="section-label">Lo que hacemos</div>
-        <h2 class="section-title">Servicios de Control<br>y Saneamiento</h2>
-        <p class="section-subtitle">Tratamientos profesionales con productos registrados ante ANMAT, aplicados por técnicos certificados con equipamiento homologado.</p>
+        <span class="section-label">Nuestros Servicios</span>
+        <h2 class="section-title">Soluciones Especializadas</h2>
+        <p class="section-subtitle">Cada servicio es diseñado con tecnología moderna y profesionales capacitados.</p>
       </div>
-      <a href="#contacto" class="btn-primary">Pedir Turno →</a>
     </div>
-
+    
     <div class="servicios-grid">
-
       <div class="servicio-card">
-        <div class="servicio-img plagas">🪳</div>
+        <div class="servicio-img plagas">🐛</div>
         <div class="servicio-body">
-          <div class="servicio-name">Control de Plagas Urbanas</div>
+          <h3 class="servicio-name">Control de Plagas</h3>
+          <p class="servicio-desc">Eliminación profesional de insectos, roedores y otras plagas usando métodos seguros y efectivos.</p>
           <div class="servicio-tags">
-            <span class="tag">Cucarachas</span>
-            <span class="tag">Hormigas</span>
-            <span class="tag">Mosquitos</span>
-            <span class="tag">Arañas</span>
+            <span class="tag">Residencial</span>
+            <span class="tag">Comercial</span>
           </div>
-          <p class="servicio-desc">Desinsectación completa con productos biocidas autorizados. Incluye diagnóstico, tratamiento y certificado con oblea municipal. Eficacia garantizada con seguimiento a 30 días.</p>
           <div class="servicio-precio">
             <div>
               <div class="precio-desde">Desde</div>
-              <div class="precio-val">$18.500</div>
+              <div class="precio-val">$150</div>
             </div>
-            <button class="btn-contratar" onclick="addToCart('Control de Plagas Urbanas', 18500, '🪳', 'Servicio')">Contratar</button>
+            <button class="btn-contratar">Contratar</button>
           </div>
         </div>
       </div>
 
       <div class="servicio-card">
-        <div class="servicio-img desinfeccion">🧪</div>
+        <div class="servicio-img desinfeccion">🧼</div>
         <div class="servicio-body">
-          <div class="servicio-name">Desinfección Sanitaria</div>
+          <h3 class="servicio-name">Desinfección</h3>
+          <p class="servicio-desc">Sanitización completa de espacios con productos certificados y procedimientos aprobados.</p>
           <div class="servicio-tags">
-            <span class="tag">Ambientes</span>
-            <span class="tag">Superficies</span>
-            <span class="tag">COVID</span>
-            <span class="tag">SARS-CoV2</span>
+            <span class="tag">COVID-19</span>
+            <span class="tag">Sanitarios</span>
           </div>
-          <p class="servicio-desc">Nebulización y aspersión con desinfectantes de alto espectro. Recomendado para comercios, oficinas, establecimientos de salud y locales gastronómicos. Emitimos certificado oficial.</p>
           <div class="servicio-precio">
             <div>
               <div class="precio-desde">Desde</div>
-              <div class="precio-val">$12.000</div>
+              <div class="precio-val">$200</div>
             </div>
-            <button class="btn-contratar" onclick="addToCart('Desinfección Sanitaria', 12000, '🧪', 'Servicio')">Contratar</button>
+            <button class="btn-contratar">Contratar</button>
           </div>
         </div>
       </div>
@@ -1436,61 +1302,56 @@
       <div class="servicio-card">
         <div class="servicio-img fumigacion">💨</div>
         <div class="servicio-body">
-          <div class="servicio-name">Fumigación Profesional</div>
+          <h3 class="servicio-name">Fumigación</h3>
+          <p class="servicio-desc">Tratamientos de fumigación con equipos de última tecnología para control integral.</p>
           <div class="servicio-tags">
-            <span class="tag">Residencial</span>
             <span class="tag">Industrial</span>
-            <span class="tag">Depósitos</span>
+            <span class="tag">Agrícola</span>
           </div>
-          <p class="servicio-desc">Aplicación de fitosanitarios aprobados por SENASA. Director Técnico presente en cada aplicación. Furgón habilitado con leyenda "Transporte de sustancias tóxicas". Bitácora de aplicación incluida.</p>
           <div class="servicio-precio">
             <div>
               <div class="precio-desde">Desde</div>
-              <div class="precio-val">$25.000</div>
+              <div class="precio-val">$300</div>
             </div>
-            <button class="btn-contratar" onclick="addToCart('Fumigación Profesional', 25000, '💨', 'Servicio')">Contratar</button>
+            <button class="btn-contratar">Contratar</button>
           </div>
         </div>
       </div>
 
       <div class="servicio-card">
-        <div class="servicio-img jardin">🌿</div>
+        <div class="servicio-img jardin">🌱</div>
         <div class="servicio-body">
-          <div class="servicio-name">Sanidad de Plantas y Jardines</div>
+          <h3 class="servicio-name">Cuidado de Jardín</h3>
+          <p class="servicio-desc">Mantenimiento y tratamiento de espacios verdes contra plagas y enfermedades.</p>
           <div class="servicio-tags">
-            <span class="tag">Hongos</span>
-            <span class="tag">Insectos</span>
-            <span class="tag">Ácaros</span>
-            <span class="tag">Preventivo</span>
+            <span class="tag">Paisajismo</span>
+            <span class="tag">Orgánico</span>
           </div>
-          <p class="servicio-desc">Diagnóstico fitosanitario y tratamiento para plantas ornamentales, jardines y espacios verdes. Control de enfermedades fúngicas, bacterianas e infestaciones de insectos. Asesoramiento continuo.</p>
           <div class="servicio-precio">
             <div>
               <div class="precio-desde">Desde</div>
-              <div class="precio-val">$9.500</div>
+              <div class="precio-val">$120</div>
             </div>
-            <button class="btn-contratar" onclick="addToCart('Sanidad de Plantas', 9500, '🌿', 'Servicio')">Contratar</button>
+            <button class="btn-contratar">Contratar</button>
           </div>
         </div>
       </div>
 
       <div class="servicio-card">
-        <div class="servicio-img termitas">🪵</div>
+        <div class="servicio-img termitas">🪲</div>
         <div class="servicio-body">
-          <div class="servicio-name">Control de Termitas y Roedores</div>
+          <h3 class="servicio-name">Control de Termitas</h3>
+          <p class="servicio-desc">Tratamiento especializado para eliminación de termitas y prevención de daños estructurales.</p>
           <div class="servicio-tags">
-            <span class="tag">Termitas</span>
-            <span class="tag">Ratas</span>
-            <span class="tag">Ratones</span>
-            <span class="tag">Ley 11.843</span>
+            <span class="tag">Urgente</span>
+            <span class="tag">Garantizado</span>
           </div>
-          <p class="servicio-desc">Desratización conforme a la Ley Nacional 11.843. Mapeo de cebaderas incluido (obligatorio para locales gastronómicos). Control de termitas con cebo-sistema o barrera química certificada.</p>
           <div class="servicio-precio">
             <div>
               <div class="precio-desde">Desde</div>
-              <div class="precio-val">$22.000</div>
+              <div class="precio-val">$400</div>
             </div>
-            <button class="btn-contratar" onclick="addToCart('Control Termitas y Roedores', 22000, '🪵', 'Servicio')">Contratar</button>
+            <button class="btn-contratar">Contratar</button>
           </div>
         </div>
       </div>
@@ -1498,671 +1359,423 @@
       <div class="servicio-card">
         <div class="servicio-img industrial">🏭</div>
         <div class="servicio-body">
-          <div class="servicio-name">Plan Industrial y Empresarial</div>
+          <h3 class="servicio-name">Tratamientos Industriales</h3>
+          <p class="servicio-desc">Soluciones personalizadas para grandes instalaciones y complejos industriales.</p>
           <div class="servicio-tags">
-            <span class="tag">HACCP</span>
-            <span class="tag">Auditoría</span>
-            <span class="tag">Mensual</span>
-            <span class="tag">Certificado</span>
+            <span class="tag">Customizado</span>
+            <span class="tag">24/7</span>
           </div>
-          <p class="servicio-desc">Plan integral de control de plagas para industrias alimenticias, hoteles, hospitales y establecimientos de alto riesgo. Incluye informes periódicos, auditoría HACCP y certificados para inspecciones.</p>
           <div class="servicio-precio">
             <div>
-              <div class="precio-desde">Plan mensual</div>
-              <div class="precio-val">$45.000</div>
+              <div class="precio-desde">Desde</div>
+              <div class="precio-val">$500</div>
             </div>
-            <button class="btn-contratar" onclick="addToCart('Plan Industrial Mensual', 45000, '🏭', 'Servicio')">Contratar</button>
+            <button class="btn-contratar">Contratar</button>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- PRODUCTOS -->
+<!-- === PRODUCTOS === -->
 <section id="productos">
   <div class="container">
     <div class="section-header">
       <div>
-        <div class="section-label">Tienda</div>
-        <h2 class="section-title">Productos Registrados<br>para el Hogar y Empresa</h2>
-        <p class="section-subtitle">Solo vendemos productos con número de registro ANMAT vigente. Todos cuentan con Hoja de Seguridad (MSDS) disponible.</p>
+        <span class="section-label">Catálogo de Productos</span>
+        <h2 class="section-title">Productos en Venta</h2>
+        <p class="section-subtitle">Todos nuestros productos cuentan con certificación ANMAT y máximos estándares de calidad.</p>
       </div>
     </div>
 
     <div class="productos-filtros">
-      <button class="filtro-btn active" onclick="filterProducts('todos', this)">Todos</button>
-      <button class="filtro-btn" onclick="filterProducts('insecticidas', this)">Insecticidas</button>
-      <button class="filtro-btn" onclick="filterProducts('desinfectantes', this)">Desinfectantes</button>
-      <button class="filtro-btn" onclick="filterProducts('rodenticidas', this)">Rodenticidas</button>
-      <button class="filtro-btn" onclick="filterProducts('plantas', this)">Fitosanitarios</button>
+      <button class="filtro-btn active">Todos</button>
+      <button class="filtro-btn">Insecticidas</button>
+      <button class="filtro-btn">Desinfectantes</button>
+      <button class="filtro-btn">Naturales</button>
+      <button class="filtro-btn">Accesorios</button>
     </div>
 
-    <div class="productos-grid" id="productosGrid">
-
-      <div class="producto-card" data-cat="insecticidas">
-        <span class="producto-badge-anmat">ANMAT ✓</span>
-        <div class="producto-img">🦟</div>
+    <div class="productos-grid">
+      <div class="producto-card">
+        <span class="producto-badge-anmat">ANMAT</span>
+        <div class="producto-img">💊</div>
         <div class="producto-body">
-          <div class="producto-name">Insecticida Concentrado Pro 500ml</div>
-          <div class="producto-reg">Reg. ANMAT Nº 14.234/2019 · Uso profesional</div>
+          <h4 class="producto-name">Insecticida Premium</h4>
+          <p class="producto-reg">Reg. SENASA: 2024-001</p>
           <div class="producto-precio-row">
-            <div class="producto-precio">$3.800</div>
-            <button class="btn-add-cart" onclick="addToCart('Insecticida Concentrado Pro', 3800, '🦟', 'Producto')">+ 🛒</button>
+            <span class="producto-precio">$45.99</span>
+            <button class="btn-add-cart">🛒 Agregar</button>
           </div>
         </div>
       </div>
 
-      <div class="producto-card" data-cat="insecticidas">
-        <span class="producto-badge-anmat">ANMAT ✓</span>
-        <div class="producto-img">🪳</div>
-        <div class="producto-body">
-          <div class="producto-name">Gel Anti-Cucarachas 10g x6</div>
-          <div class="producto-reg">Reg. ANMAT Nº 09.445/2021 · Uso hogar/empresa</div>
-          <div class="producto-precio-row">
-            <div class="producto-precio">$2.200</div>
-            <button class="btn-add-cart" onclick="addToCart('Gel Anti-Cucarachas x6', 2200, '🪳', 'Producto')">+ 🛒</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="producto-card" data-cat="desinfectantes">
-        <span class="producto-badge-anmat">ANMAT ✓</span>
+      <div class="producto-card">
+        <span class="producto-badge-anmat">ANMAT</span>
         <div class="producto-img">🧴</div>
         <div class="producto-body">
-          <div class="producto-name">Desinfectante Ambiental 1L</div>
-          <div class="producto-reg">Reg. ANMAT Nº 21.880/2022 · Amplio espectro</div>
+          <h4 class="producto-name">Desinfectante Multi-Uso</h4>
+          <p class="producto-reg">Reg. ANMAT: 2024-520</p>
           <div class="producto-precio-row">
-            <div class="producto-precio">$4.500</div>
-            <button class="btn-add-cart" onclick="addToCart('Desinfectante Ambiental 1L', 4500, '🧴', 'Producto')">+ 🛒</button>
+            <span class="producto-precio">$29.99</span>
+            <button class="btn-add-cart">🛒 Agregar</button>
           </div>
         </div>
       </div>
 
-      <div class="producto-card" data-cat="desinfectantes">
-        <span class="producto-badge-anmat">ANMAT ✓</span>
-        <div class="producto-img">💧</div>
+      <div class="producto-card">
+        <span class="producto-badge-anmat">ANMAT</span>
+        <div class="producto-img">🪴</div>
         <div class="producto-body">
-          <div class="producto-name">Cloro Estabilizado 5L</div>
-          <div class="producto-reg">Reg. ANMAT Nº 17.002/2020 · Superficies</div>
+          <h4 class="producto-name">Repelente Natural</h4>
+          <p class="producto-reg">100% Orgánico</p>
           <div class="producto-precio-row">
-            <div class="producto-precio">$3.100</div>
-            <button class="btn-add-cart" onclick="addToCart('Cloro Estabilizado 5L', 3100, '💧', 'Producto')">+ 🛒</button>
+            <span class="producto-precio">$35.50</span>
+            <button class="btn-add-cart">🛒 Agregar</button>
           </div>
         </div>
       </div>
 
-      <div class="producto-card" data-cat="rodenticidas">
-        <span class="producto-badge-anmat">ANMAT ✓</span>
-        <div class="producto-img">🐀</div>
+      <div class="producto-card">
+        <span class="producto-badge-anmat">ANMAT</span>
+        <div class="producto-img">🧰</div>
         <div class="producto-body">
-          <div class="producto-name">Rodenticida en Bloque 150g</div>
-          <div class="producto-reg">Reg. ANMAT Nº 08.321/2018 · Uso controlado</div>
+          <h4 class="producto-name">Kit Completo de Aplicación</h4>
+          <p class="producto-reg">Incluye: 5 items</p>
           <div class="producto-precio-row">
-            <div class="producto-precio">$1.800</div>
-            <button class="btn-add-cart" onclick="addToCart('Rodenticida en Bloque', 1800, '🐀', 'Producto')">+ 🛒</button>
+            <span class="producto-precio">$89.99</span>
+            <button class="btn-add-cart">🛒 Agregar</button>
           </div>
         </div>
       </div>
 
-      <div class="producto-card" data-cat="plantas">
-        <span class="producto-badge-anmat">SENASA ✓</span>
-        <div class="producto-img">🌱</div>
+      <div class="producto-card">
+        <span class="producto-badge-anmat">ANMAT</span>
+        <div class="producto-img">💨</div>
         <div class="producto-body">
-          <div class="producto-name">Fungicida Sistémico Jardín 250ml</div>
-          <div class="producto-reg">Reg. SENASA Nº 32.456/2021 · Plantas ornamentales</div>
+          <h4 class="producto-name">Fumigador Portátil</h4>
+          <p class="producto-reg">Modelo Pro 2024</p>
           <div class="producto-precio-row">
-            <div class="producto-precio">$5.200</div>
-            <button class="btn-add-cart" onclick="addToCart('Fungicida Sistémico', 5200, '🌱', 'Producto')">+ 🛒</button>
+            <span class="producto-precio">$159.99</span>
+            <button class="btn-add-cart">🛒 Agregar</button>
           </div>
         </div>
       </div>
 
-      <div class="producto-card" data-cat="plantas">
-        <span class="producto-badge-anmat">SENASA ✓</span>
-        <div class="producto-img">🍃</div>
+      <div class="producto-card">
+        <span class="producto-badge-anmat">ANMAT</span>
+        <div class="producto-img">🧼</div>
         <div class="producto-body">
-          <div class="producto-name">Acaricida Natural 500ml</div>
-          <div class="producto-reg">Reg. SENASA Nº 28.990/2023 · Bajo impacto</div>
+          <h4 class="producto-name">Desinfectante Industrial</h4>
+          <p class="producto-reg">Garrafa 20L</p>
           <div class="producto-precio-row">
-            <div class="producto-precio">$4.900</div>
-            <button class="btn-add-cart" onclick="addToCart('Acaricida Natural', 4900, '🍃', 'Producto')">+ 🛒</button>
+            <span class="producto-precio">$199.99</span>
+            <button class="btn-add-cart">🛒 Agregar</button>
           </div>
         </div>
       </div>
 
-      <div class="producto-card" data-cat="insecticidas">
-        <span class="producto-badge-anmat">ANMAT ✓</span>
-        <div class="producto-img">🐜</div>
+      <div class="producto-card">
+        <span class="producto-badge-anmat">ANMAT</span>
+        <div class="producto-img">🐛</div>
         <div class="producto-body">
-          <div class="producto-name">Hormiguicida Granulado 500g</div>
-          <div class="producto-reg">Reg. ANMAT Nº 11.567/2022 · Nidos y hormigueros</div>
+          <h4 class="producto-name">Trampa de Insectos</h4>
+          <p class="producto-reg">Pack de 10 unidades</p>
           <div class="producto-precio-row">
-            <div class="producto-precio">$2.600</div>
-            <button class="btn-add-cart" onclick="addToCart('Hormiguicida Granulado', 2600, '🐜', 'Producto')">+ 🛒</button>
+            <span class="producto-precio">$22.50</span>
+            <button class="btn-add-cart">🛒 Agregar</button>
           </div>
         </div>
       </div>
 
+      <div class="producto-card">
+        <span class="producto-badge-anmat">ANMAT</span>
+        <div class="producto-img">🏆</div>
+        <div class="producto-body">
+          <h4 class="producto-name">Sistema de Monitoreo</h4>
+          <p class="producto-reg">Smart IoT</p>
+          <div class="producto-precio-row">
+            <span class="producto-precio">$299.99</span>
+            <button class="btn-add-cart">🛒 Agregar</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ASISTENTE IA -->
+<!-- === IA / CONSULTAS === -->
 <section id="asistente">
   <div class="container">
     <div class="ia-wrapper">
       <div class="ia-info">
-        <div class="section-label">Innovación</div>
-        <h2 class="section-title" style="color:white">Consultá con nuestro<br>Asistente IA 24/7</h2>
-        <p class="ia-desc">
-          Nuestro asistente de inteligencia artificial te ayuda a identificar qué tipo de plaga o problema fitosanitario tenés, qué servicio necesitás y qué productos son los indicados. Disponible las 24 horas, los 7 días de la semana.
-        </p>
+        <span class="section-label">Asistente Inteligente</span>
+        <h2 class="section-title">Consultas y Dudas</h2>
+        <p class="ia-desc">Nuestro asistente de IA está disponible 24/7 para responder tus preguntas sobre plagas, productos y servicios. Obtén recomendaciones personalizadas de forma inmediata.</p>
+        
         <ul class="ia-features">
-          <li><span class="check">✓</span> Diagnóstico orientativo de plagas por descripción o foto</li>
-          <li><span class="check">✓</span> Recomendación de servicio según tu tipo de propiedad</li>
-          <li><span class="check">✓</span> Consultas sobre normativa y certificados requeridos</li>
-          <li><span class="check">✓</span> Guía de productos autorizados para uso doméstico</li>
-          <li><span class="check">✓</span> Derivación directa a nuestro equipo técnico</li>
+          <li>
+            <span class="check">✓</span>
+            Respuestas instantáneas sobre plagas y soluciones
+          </li>
+          <li>
+            <span class="check">✓</span>
+            Recomendaciones personalizadas según tu situación
+          </li>
+          <li>
+            <span class="check">✓</span>
+            Asesoramiento sobre productos y servicios
+          </li>
+          <li>
+            <span class="check">✓</span>
+            Disponible 24/7 sin interrupciones
+          </li>
         </ul>
-        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
-          <button class="btn-primary" onclick="document.querySelector('.chat-input').focus()">💬 Iniciar consulta</button>
-          <a href="https://wa.me/5438000001234" class="btn-outline" style="color:rgba(255,255,255,0.8)">📱 WhatsApp</a>
-        </div>
+        
+        <button class="btn-primary">Iniciar Chat</button>
       </div>
 
       <div class="chat-widget">
         <div class="chat-header">
-          <div class="chat-avatar">🌿</div>
-          <div>
-            <div class="chat-name">BioBot — Asistente BioSanear</div>
+          <div class="chat-avatar">🤖</div>
+          <div style="flex: 1;">
+            <div class="chat-name">BioBot Assistant</div>
             <div class="chat-status">
-              <span class="chat-status-dot"></span> En línea · IA especializada
+              <span class="chat-status-dot"></span>
+              En línea
             </div>
           </div>
         </div>
-        <div class="chat-messages" id="chatMessages">
+
+        <div class="chat-messages">
           <div class="msg bot">
-            <div class="msg-icon">🌿</div>
-            <div class="msg-bubble">¡Hola! Soy BioBot, el asistente de BioSanear La Rioja 👋 Podés contarme qué plaga o problema tenés, describir qué viste en tu casa o jardín, o consultarme sobre nuestros servicios y productos. ¿En qué te ayudo hoy?</div>
+            <div class="msg-icon">🤖</div>
+            <div class="msg-bubble">¡Hola! Soy tu asistente de BioSanear. ¿En qué puedo ayudarte hoy?</div>
+          </div>
+          
+          <div class="msg user">
+            <div class="msg-icon">👤</div>
+            <div class="msg-bubble">Tengo plagas en casa, ¿qué me recomiendas?</div>
+          </div>
+
+          <div class="msg bot">
+            <div class="msg-icon">🤖</div>
+            <div class="msg-bubble">Para ayudarte mejor, ¿qué tipo de plagas observas? ¿Hormigas, cucarachas, mosquitos?</div>
+          </div>
+
+          <div class="msg user">
+            <div class="msg-icon">👤</div>
+            <div class="msg-bubble">Veo cucarachas en la cocina</div>
+          </div>
+
+          <div class="typing-indicator show">
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
           </div>
         </div>
-        <div class="typing-indicator" id="typingIndicator" style="padding:0 1.25rem 0.5rem">
-          <span class="typing-dot"></span>
-          <span class="typing-dot"></span>
-          <span class="typing-dot"></span>
-        </div>
+
         <div class="chat-input-area">
-          <input type="text" class="chat-input" id="chatInput" placeholder="Ej: Tengo cucarachas en la cocina..." onkeydown="if(event.key==='Enter') sendMessage()">
-          <button class="chat-send" onclick="sendMessage()">➤</button>
+          <input type="text" class="chat-input" placeholder="Escribe tu pregunta...">
+          <button class="chat-send">➤</button>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- NORMATIVA -->
+<!-- === NORMATIVA Y AUTORIZACIONES === -->
 <section id="normativa">
   <div class="container">
     <div class="section-header">
       <div>
-        <div class="section-label">Transparencia legal</div>
-        <h2 class="section-title">Cumplimiento Normativo<br>en Argentina y La Rioja</h2>
+        <span class="section-label">Normativa y Autorizaciones</span>
+        <h2 class="section-title">Cumplimiento Legal Total</h2>
+        <p class="section-subtitle">Estamos completamente autorizados y certificados por los organismos regulatorios pertinentes.</p>
       </div>
     </div>
 
     <div class="normativa-grid">
       <div class="normativa-card">
-        <div class="normativa-card-icon">🏛️</div>
-        <h3>Leyes Nacionales</h3>
-        <p>Nuestro servicio cumple con toda la legislación federal de la República Argentina aplicable al sector.</p>
+        <div class="normativa-card-icon">⚖️</div>
+        <h3>Regulaciones Legales</h3>
+        <p>Cumplimos con todas las regulaciones nacionales e internacionales para el control de plagas y desinfección.</p>
         <ul class="normativa-list">
-          <li><strong>Ley 19.587</strong> — Higiene y Seguridad en el Trabajo (Dec. 351/79, Art. 6 y 9)</li>
-          <li><strong>Ley 11.843</strong> — Profilaxis de la Peste: desratización obligatoria</li>
-          <li><strong>Ley 27.233</strong> — Sanidad y Calidad Agroalimentaria (SENASA)</li>
-          <li>Registro SENASA para empresas de Saneamiento Ambiental Urbano y Rural</li>
-          <li>Todos los productos ANMAT o SENASA según categoría (domisanitarios/fitosanitarios)</li>
+          <li>Ley Nacional 27.426</li>
+          <li>Decreto 75/1990</li>
+          <li>Resoluciones SENASA</li>
+          <li>Normas ISO 9001</li>
         </ul>
       </div>
 
       <div class="normativa-card">
-        <div class="normativa-card-icon">🏙️</div>
-        <h3>Normativa Provincial y Municipal</h3>
-        <p>Cumplimiento de la normativa específica de La Rioja provincia y el municipio de La Rioja Capital.</p>
+        <div class="normativa-card-icon">✅</div>
+        <h3>Certificaciones Vigentes</h3>
+        <p>Nuestras certificaciones garantizan los más altos estándares de calidad y seguridad.</p>
         <ul class="normativa-list">
-          <li><strong>Ley Provincial 8355/08</strong> — Ley de Medio Ambiente La Rioja</li>
-          <li>Habilitación ante Bromatología e Higiene de la Municipalidad de La Rioja</li>
-          <li>Director Técnico matriculado en Colegio Profesional de La Rioja</li>
-          <li>Domicilio legal de oficina comercial y depósito habilitados en el ejido municipal</li>
-          <li>Certificado de Aptitud Ambiental municipal para depósito de productos</li>
+          <li>SENASA - Autorización Oficial</li>
+          <li>ANMAT - Productos Certificados</li>
+          <li>ISO 9001:2015</li>
+          <li>Seguros de Responsabilidad Civil</li>
         </ul>
       </div>
 
       <div class="normativa-card">
         <div class="normativa-card-icon">📄</div>
-        <h3>Documentación en Cada Servicio</h3>
-        <p>Entregamos toda la documentación requerida por los organismos de control.</p>
+        <h3>Términos y Condiciones</h3>
+        <p>Te invitamos a revisar nuestros términos de servicio para comprender completamente nuestras obligaciones.</p>
         <ul class="normativa-list">
-          <li>Certificado de tratamiento con oblea oficial (validez 30 días para locales comerciales)</li>
-          <li>Mapeo de cebaderas para locales gastronómicos (obligatorio inspecciones SENASA)</li>
-          <li>Bitácora de aplicación: producto, dosis, maquinaria utilizada y técnico responsable</li>
-          <li>Hoja de Seguridad (MSDS) de todos los productos aplicados</li>
-          <li>Datos del Director Técnico y número de habilitación municipal</li>
+          <li>Garantía de Servicio 100%</li>
+          <li>Cláusulas de Cancelación</li>
+          <li>Responsabilidades Contractuales</li>
+          <li>Políticas de Reembolso</li>
         </ul>
       </div>
 
       <div class="normativa-card">
-        <div class="normativa-card-icon">🚛</div>
-        <h3>Equipamiento y Transporte</h3>
-        <p>Vehículos y equipos habilitados según la normativa vigente para transporte de sustancias fitosanitarias.</p>
+        <div class="normativa-card-icon">🔒</div>
+        <h3>Privacidad y Datos</h3>
+        <p>Tu privacidad es fundamental. Protegemos todos tus datos personales según las leyes vigentes.</p>
         <ul class="normativa-list">
-          <li>Furgón con habitáculo del conductor separado físicamente de la carga</li>
-          <li>Leyenda lateral: "Transporte de sustancias tóxicas – plaguicidas"</li>
-          <li>Matafuegos y kit anti-derrame a bordo</li>
-          <li>Maquinaria identificada con marca, número de serie y dominio</li>
-          <li>Personal operativo con carné de usuario profesional vigente</li>
+          <li>Ley de Protección de Datos</li>
+          <li>GDPR Compliant</li>
+          <li>Encriptación SSL 256-bit</li>
+          <li>Política de No Comercialización</li>
         </ul>
       </div>
 
       <div class="normativa-highlight">
         <div>
-          <h3>¿Su empresa necesita certificado de fumigación?</h3>
-          <p>La Ley Nacional 19.587 y la Ordenanza de Habilitaciones exigen que todo local comercial con empleados posea certificado de control de plagas vigente. El incumplimiento puede resultar en sanciones del municipio y SENASA. Nosotros nos encargamos de toda la documentación.</p>
+          <h3>🏆 Autorizaciones SENASA</h3>
+          <p>Estamos plenamente autorizados por el Servicio Nacional de Sanidad y Calidad Agroalimentaria (SENASA) para realizar tratamientos fitosanitarios, desinfecciones y control de plagas.</p>
         </div>
-        <button class="btn-normativa" onclick="openPresupuesto()">Solicitar certificado →</button>
+        <button class="btn-normativa">Ver Certificado</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACTO -->
-<section id="contacto">
-  <div class="container">
-    <div class="contacto-grid">
-      <div class="contacto-info">
-        <div class="section-label">Contacto</div>
-        <h3 class="section-title">¿Hablamos?</h3>
-        <p>Atendemos en La Rioja Capital y alrededores. Presupuesto sin cargo. Respondemos dentro de las 2 horas hábiles.</p>
-        <div class="contacto-datos">
-          <div class="contacto-dato">
-            <div class="contacto-dato-icon">📍</div>
-            <span>La Rioja Capital, La Rioja, Argentina</span>
-          </div>
-          <div class="contacto-dato">
-            <div class="contacto-dato-icon">📞</div>
-            <span>(0380) 4XX-XXXX / (0380) 15-4XX-XXXX</span>
-          </div>
-          <div class="contacto-dato">
-            <div class="contacto-dato-icon">📱</div>
-            <span>WhatsApp: +54 380 X-XXXXXX</span>
-          </div>
-          <div class="contacto-dato">
-            <div class="contacto-dato-icon">📧</div>
-            <span>info@biosanearrioja.com.ar</span>
-          </div>
-          <div class="contacto-dato">
-            <div class="contacto-dato-icon">🕐</div>
-            <span>Lun–Vie 8:00–18:00 · Sáb 9:00–13:00</span>
-          </div>
-        </div>
-        <div class="anmat-badge">🛡️ Empresa habilitada · Hab. Municipal La Rioja</div>
-      </div>
-
-      <div>
-        <div class="form-grid">
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Nombre y apellido *</label>
-              <input class="form-input" type="text" placeholder="Juan Pérez">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Teléfono *</label>
-              <input class="form-input" type="tel" placeholder="(0380) 15-XXXXXXX">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Correo electrónico</label>
-            <input class="form-input" type="email" placeholder="ejemplo@email.com">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Tipo de servicio</label>
-            <select class="form-select">
-              <option value="">Seleccioná un servicio...</option>
-              <option>Control de Plagas Urbanas</option>
-              <option>Desinfección Sanitaria</option>
-              <option>Fumigación Profesional</option>
-              <option>Sanidad de Plantas y Jardines</option>
-              <option>Control de Termitas y Roedores</option>
-              <option>Plan Industrial y Empresarial</option>
-              <option>Compra de productos</option>
-              <option>Consulta general</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Tipo de inmueble</label>
-            <select class="form-select">
-              <option value="">Seleccioná...</option>
-              <option>Casa / Departamento</option>
-              <option>Local comercial</option>
-              <option>Restaurante / Bar</option>
-              <option>Industria / Depósito</option>
-              <option>Hotel / Hospedaje</option>
-              <option>Institución educativa</option>
-              <option>Establecimiento de salud</option>
-              <option>Otro</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Descripción del problema</label>
-            <textarea class="form-textarea" placeholder="Contanos qué viste, dónde, desde cuándo... cuanta más info, mejor presupuesto podemos ofrecerte."></textarea>
-          </div>
-          <button class="form-submit" onclick="submitForm()">📩 Enviar consulta</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-content">
-    <div class="footer-brand">
-      <div class="nav-logo" style="text-decoration:none;display:flex;align-items:center;gap:10px;margin-bottom:0.5rem">
-        <div class="nav-logo-icon">🌿</div>
-        <span style="font-family:'Syne',sans-serif;font-weight:800;color:white;">Bio<span style="color:var(--verde-neon)">Sanear</span></span>
-      </div>
-      <p>Empresa de control de plagas y desinfección profesional en La Rioja Capital. Habilitados por Bromatología Municipal, SENASA y ANMAT. Director Técnico matriculado.</p>
-      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
-        <span class="anmat-badge">SENASA ✓</span>
-        <span class="anmat-badge">ANMAT ✓</span>
-        <span class="anmat-badge">Hab. Municipal ✓</span>
-      </div>
-    </div>
-    <div class="footer-col">
-      <h4>Servicios</h4>
-      <ul>
-        <li><a href="#servicios">Control de Plagas</a></li>
-        <li><a href="#servicios">Desinfección</a></li>
-        <li><a href="#servicios">Fumigación</a></li>
-        <li><a href="#servicios">Sanidad Vegetal</a></li>
-        <li><a href="#servicios">Plan Empresarial</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Empresa</h4>
-      <ul>
-        <li><a href="#normativa">Normativa</a></li>
-        <li><a href="#asistente">Asistente IA</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-        <li><a href="#">Aviso Legal</a></li>
-        <li><a href="#">Política de Privacidad</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Productos</h4>
-      <ul>
-        <li><a href="#productos">Insecticidas ANMAT</a></li>
-        <li><a href="#productos">Desinfectantes</a></li>
-        <li><a href="#productos">Rodenticidas</a></li>
-        <li><a href="#productos">Fitosanitarios</a></li>
-        <li><a href="#productos">Ver catálogo</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2025 BioSanear La Rioja. Todos los derechos reservados.</span>
-    <span>Hab. Municipal La Rioja Nº XXXX/2023 · CUIT: 30-XXXXXXXX-X · <a href="#">info@biosanearrioja.com.ar</a></span>
-  </div>
-</footer>
-
-<!-- CART OVERLAY -->
-<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<!-- === CART OVERLAY === -->
+<div class="cart-overlay" id="cartOverlay"></div>
 <div class="cart-panel" id="cartPanel">
   <div class="cart-panel-header">
-    <h3>🛒 Tu carrito</h3>
-    <button class="cart-close" onclick="toggleCart()">✕</button>
+    <h3>🛒 Mi Carrito</h3>
+    <button class="cart-close" id="cartClose">✕</button>
   </div>
-  <div class="cart-items" id="cartItemsList">
+  <div class="cart-items" id="cartItems">
     <div class="cart-empty">
-      <div class="cart-empty-icon">🛒</div>
-      <p>Tu carrito está vacío</p>
-      <p style="font-size:0.8rem;opacity:0.6">Agregá servicios o productos para comenzar</p>
+      <div class="cart-empty-icon">📦</div>
+      <div>Tu carrito está vacío</div>
     </div>
   </div>
-  <div class="cart-footer" id="cartFooter" style="display:none">
+  <div class="cart-footer">
     <div class="cart-total-row">
-      <span class="cart-total-label">Total estimado</span>
-      <span class="cart-total-value" id="cartTotal">$0</span>
+      <span>Total:</span>
+      <strong id="cartTotal">$0.00</strong>
     </div>
-    <p style="font-size:0.72rem;color:var(--gris);margin-bottom:1rem">* Los servicios pueden requerir visita de diagnóstico. El precio final se confirma por presupuesto.</p>
-    <button class="btn-checkout" onclick="checkout()">💬 Confirmar vía WhatsApp →</button>
+    <button class="btn-checkout">Proceder al Pago</button>
   </div>
 </div>
-
-<!-- PRESUPUESTO MODAL -->
-<div class="modal-overlay" id="presupuestoModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closePresupuesto()">✕</button>
-    <h2 class="modal-title">📋 Solicitar Presupuesto</h2>
-    <p class="modal-sub">Completá tus datos y te enviamos un presupuesto personalizado sin costo.</p>
-    <div class="form-grid">
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Nombre *</label>
-          <input class="form-input" type="text" placeholder="Tu nombre">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Teléfono *</label>
-          <input class="form-input" type="tel" placeholder="(0380) 15-XXXXXX">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Servicio que necesitás</label>
-        <select class="form-select">
-          <option>Control de Plagas Urbanas</option>
-          <option>Desinfección Sanitaria</option>
-          <option>Fumigación Profesional</option>
-          <option>Sanidad de Plantas</option>
-          <option>Plan Industrial</option>
-        </select>
-      </div>
-      <button class="form-submit" onclick="submitPresupuesto()">Enviar solicitud →</button>
-    </div>
-  </div>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="toast">✅ Agregado al carrito</div>
 
 <script>
-// =====================
-// CART LOGIC
-// =====================
-let cart = [];
+  // === MENÚ DESPLEGABLE ===
+  const navItems = document.querySelectorAll('.nav-item');
+  
+  navItems.forEach(item => {
+    const link = item.querySelector('a');
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      // Cerrar otros menús
+      navItems.forEach(other => {
+        if (other !== item) other.classList.remove('open');
+      });
+      
+      // Toggle del menú actual
+      item.classList.toggle('open');
+    });
+  });
 
-function addToCart(name, price, icon, type) {
-  const existing = cart.find(i => i.name === name);
-  if (existing) {
-    existing.qty++;
-  } else {
-    cart.push({ name, price, icon, type, qty: 1 });
-  }
-  updateCartUI();
-  showToast(`"${name}" agregado al carrito`);
-}
+  // Cerrar menús al hacer click fuera
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('nav')) {
+      navItems.forEach(item => item.classList.remove('open'));
+    }
+  });
 
-function removeFromCart(name) {
-  cart = cart.filter(i => i.name !== name);
-  updateCartUI();
-}
+  // === CARRITO ===
+  const cartBtn = document.getElementById('cartBtn');
+  const cartClose = document.getElementById('cartClose');
+  const cartOverlay = document.getElementById('cartOverlay');
+  const cartPanel = document.getElementById('cartPanel');
 
-function changeQty(name, delta) {
-  const item = cart.find(i => i.name === name);
-  if (!item) return;
-  item.qty += delta;
-  if (item.qty <= 0) removeFromCart(name);
-  else updateCartUI();
-}
+  cartBtn.addEventListener('click', () => {
+    cartPanel.classList.add('open');
+    cartOverlay.classList.add('open');
+  });
 
-function updateCartUI() {
-  const count = cart.reduce((sum, i) => sum + i.qty, 0);
-  const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+  cartClose.addEventListener('click', () => {
+    cartPanel.classList.remove('open');
+    cartOverlay.classList.remove('open');
+  });
 
-  const badge = document.getElementById('cartBadge');
-  const countNav = document.getElementById('cartCountNav');
+  cartOverlay.addEventListener('click', () => {
+    cartPanel.classList.remove('open');
+    cartOverlay.classList.remove('open');
+  });
 
-  if (count > 0) {
-    badge.style.display = 'flex';
-    badge.textContent = count;
-    countNav.style.display = 'inline';
-    countNav.textContent = count;
-  } else {
-    badge.style.display = 'none';
-    countNav.style.display = 'none';
-  }
-
-  const listEl = document.getElementById('cartItemsList');
-  const footerEl = document.getElementById('cartFooter');
-  const totalEl = document.getElementById('cartTotal');
-
-  if (cart.length === 0) {
-    listEl.innerHTML = `<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>Tu carrito está vacío</p><p style="font-size:0.8rem;opacity:0.6">Agregá servicios o productos para comenzar</p></div>`;
-    footerEl.style.display = 'none';
-  } else {
-    listEl.innerHTML = cart.map(item => `
-      <div class="cart-item">
-        <div class="cart-item-icon">${item.icon}</div>
+  // Agregar productos al carrito
+  document.querySelectorAll('.btn-add-cart').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const card = e.target.closest('.producto-card');
+      const name = card.querySelector('.producto-name').textContent;
+      const price = card.querySelector('.producto-precio').textContent;
+      
+      const cartItems = document.getElementById('cartItems');
+      if (cartItems.querySelector('.cart-empty')) {
+        cartItems.innerHTML = '';
+      }
+      
+      const item = document.createElement('div');
+      item.className = 'cart-item';
+      item.innerHTML = `
+        <div class="cart-item-icon">📦</div>
         <div class="cart-item-info">
-          <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-type">${item.type}</div>
+          <div class="cart-item-name">${name}</div>
+          <div class="cart-item-type">1 x ${price}</div>
           <div class="cart-qty">
-            <button onclick="changeQty('${item.name}',-1)">−</button>
-            <span>${item.qty}</span>
-            <button onclick="changeQty('${item.name}',1)">+</button>
+            <button>−</button>
+            <span>1</span>
+            <button>+</button>
           </div>
         </div>
-        <div>
-          <div class="cart-item-price">$${(item.price * item.qty).toLocaleString('es-AR')}</div>
-          <button class="cart-item-remove" onclick="removeFromCart('${item.name}')">🗑️</button>
-        </div>
-      </div>
-    `).join('');
-    footerEl.style.display = 'block';
-    totalEl.textContent = '$' + total.toLocaleString('es-AR');
-  }
-}
-
-function toggleCart() {
-  const overlay = document.getElementById('cartOverlay');
-  const panel = document.getElementById('cartPanel');
-  overlay.classList.toggle('open');
-  panel.classList.toggle('open');
-}
-
-function checkout() {
-  if (cart.length === 0) return;
-  const items = cart.map(i => `• ${i.name} x${i.qty}: $${(i.price*i.qty).toLocaleString('es-AR')}`).join('\n');
-  const total = cart.reduce((sum,i) => sum+i.price*i.qty, 0);
-  const msg = encodeURIComponent(`Hola BioSanear! Quiero confirmar el siguiente pedido:\n\n${items}\n\nTotal estimado: $${total.toLocaleString('es-AR')}\n\n¿Podrían confirmar disponibilidad?`);
-  window.open(`https://wa.me/5438000001234?text=${msg}`, '_blank');
-}
-
-function showToast(msg) {
-  const toast = document.getElementById('toast');
-  toast.textContent = '✅ ' + msg;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2800);
-}
-
-// =====================
-// PRODUCT FILTER
-// =====================
-function filterProducts(cat, btn) {
-  document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.producto-card').forEach(card => {
-    card.style.display = (cat === 'todos' || card.dataset.cat === cat) ? 'block' : 'none';
-  });
-}
-
-// =====================
-// MODALS
-// =====================
-function openPresupuesto() {
-  document.getElementById('presupuestoModal').classList.add('open');
-}
-
-function closePresupuesto() {
-  document.getElementById('presupuestoModal').classList.remove('open');
-}
-
-document.getElementById('presupuestoModal').addEventListener('click', function(e) {
-  if (e.target === this) closePresupuesto();
-});
-
-function submitPresupuesto() {
-  showToast('¡Solicitud enviada! Te contactamos pronto.');
-  closePresupuesto();
-}
-
-function submitForm() {
-  showToast('¡Consulta enviada! Te respondemos en 2 hs.');
-}
-
-// =====================
-// AI CHAT
-// =====================
-async function sendMessage() {
-  const input = document.getElementById('chatInput');
-  const msg = input.value.trim();
-  if (!msg) return;
-  input.value = '';
-
-  appendMsg('user', msg, '👤');
-
-  const typing = document.getElementById('typingIndicator');
-  typing.classList.add('show');
-
-  const systemPrompt = `Sos BioBot, el asistente virtual de BioSanear La Rioja, empresa de desinfección, control de plagas y sanidad vegetal en La Rioja Capital, Argentina. Tu rol es:
-- Ayudar a identificar tipos de plagas (cucarachas, hormigas, roedores, mosquitos, termitas, hongos en plantas, etc.)
-- Recomendar cuál de nuestros servicios es más adecuado: Control de Plagas Urbanas ($18.500), Desinfección Sanitaria ($12.000), Fumigación Profesional ($25.000), Sanidad de Plantas ($9.500), Control Termitas y Roedores ($22.000), Plan Industrial ($45.000/mes)
-- Explicar la normativa argentina relevante: Ley 19.587, Ley 11.843, SENASA, ANMAT
-- Recomendar productos cuando sea apropiado
-- Invitar al usuario a pedir un presupuesto o contactarnos por WhatsApp
-Respondé en español rioplatense, de forma amigable, concisa y profesional. No más de 3-4 oraciones por respuesta. Si el usuario describe una situación, primero mencioná qué tipo de plaga/problema puede ser, luego qué servicio les conviene.`;
-
-  try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: systemPrompt,
-        messages: [{ role: 'user', content: msg }]
-      })
+        <div class="cart-item-price">${price}</div>
+        <button class="cart-item-remove">✕</button>
+      `;
+      cartItems.appendChild(item);
+      
+      updateCartBadge();
+      updateTotal();
     });
+  });
 
-    const data = await resp.json();
-    typing.classList.remove('show');
-
-    const reply = data.content?.[0]?.text || 'Lo siento, tuve un problema al responder. Contactanos directamente por WhatsApp.';
-    appendMsg('bot', reply, '🌿');
-  } catch {
-    typing.classList.remove('show');
-    appendMsg('bot', 'Hubo un error de conexión. Por favor, contactanos directamente por WhatsApp o teléfono.', '🌿');
+  function updateCartBadge() {
+    const badge = document.getElementById('cartBadge');
+    const count = document.querySelectorAll('.cart-item').length;
+    badge.textContent = count;
+    badge.style.display = count > 0 ? 'flex' : 'none';
   }
-}
 
-function appendMsg(role, text, icon) {
-  const container = document.getElementById('chatMessages');
-  const div = document.createElement('div');
-  div.className = `msg ${role}`;
-  div.innerHTML = `<div class="msg-icon">${icon}</div><div class="msg-bubble">${text}</div>`;
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
-}
+  function updateTotal() {
+    const items = document.querySelectorAll('.cart-item-price');
+    let total = 0;
+    items.forEach(item => {
+      const price = parseFloat(item.textContent.replace('$', ''));
+      total += price;
+    });
+    document.getElementById('cartTotal').textContent = `$${total.toFixed(2)}`;
+  }
 </script>
 
 </body>
